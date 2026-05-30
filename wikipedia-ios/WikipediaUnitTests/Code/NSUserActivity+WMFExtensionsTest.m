@@ -132,6 +132,48 @@
     XCTAssertNil(activity.wmf_longitude);
 }
 
+- (void)testPlacesURLWithInvalidLatitudeDoesNotStoreCoordinates {
+    // Given
+    NSURL *url = [NSURL URLWithString:@"wikipedia://places?latitude=abc&longitude=2.2945"];
+
+    // When
+    NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
+
+    // Then
+    XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
+    XCTAssertNil(activity.webpageURL);
+    XCTAssertNil(activity.wmf_latitude);
+    XCTAssertNil(activity.wmf_longitude);
+}
+
+- (void)testPlacesURLWithPartiallyParsedLatitudeDoesNotStoreCoordinates {
+    // Given
+    NSURL *url = [NSURL URLWithString:@"wikipedia://places?latitude=48.8584foo&longitude=2.2945"];
+
+    // When
+    NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
+
+    // Then
+    XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
+    XCTAssertNil(activity.webpageURL);
+    XCTAssertNil(activity.wmf_latitude);
+    XCTAssertNil(activity.wmf_longitude);
+}
+
+- (void)testPlacesURLWithOutOfRangeCoordinatesStoresNumericValues {
+    // Given
+    NSURL *url = [NSURL URLWithString:@"wikipedia://places?latitude=999&longitude=200"];
+
+    // When
+    NSUserActivity *activity = [NSUserActivity wmf_activityForWikipediaScheme:url];
+
+    // Then
+    XCTAssertEqual(activity.wmf_type, WMFUserActivityTypePlaces);
+    XCTAssertNil(activity.webpageURL);
+    XCTAssertEqualObjects(activity.wmf_latitude, @999);
+    XCTAssertEqualObjects(activity.wmf_longitude, @200);
+}
+
 #pragma mark - Places coordinate helpers
 
 - (void)testWmfLatitudeAndLongitudeReturnNilForNonPlacesActivity {

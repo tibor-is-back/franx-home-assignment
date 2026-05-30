@@ -60,7 +60,6 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
 }
 
 + (instancetype)wmf_placesActivityWithURL:(NSURL *)activityURL {
-    NSURLComponents *components = [NSURLComponents componentsWithURL:activityURL resolvingAgainstBaseURL:NO];
     NSString *articleQuerryValue = [activityURL wmf_valueForQueryKey:@"WMFArticleURL"];
     NSString *latitudeQuerryValue = [activityURL wmf_valueForQueryKey:@"latitude"];
     NSString *longitudeQuerryValue = [activityURL wmf_valueForQueryKey:@"longitude"];
@@ -69,11 +68,15 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
     
     if (articleQuerryValue != nil) {
         activity.webpageURL = [NSURL URLWithString:articleQuerryValue];
-    } else if (latitudeQuerryValue != nil && longitudeQuerryValue != nil) {
-        NSMutableDictionary *userInfo = [activity.userInfo mutableCopy];
-        userInfo[@"latitude"] = @(latitudeQuerryValue.doubleValue);
-        userInfo[@"longitude"] = @(longitudeQuerryValue.doubleValue);
-        activity.userInfo = userInfo;
+    } else {
+        NSNumber *latitude = [self wmf_numberFromString:latitudeQuerryValue];
+        NSNumber *longitude = [self wmf_numberFromString:longitudeQuerryValue];
+        if (latitude != nil && longitude != nil) {
+            NSMutableDictionary *userInfo = [activity.userInfo mutableCopy];
+            userInfo[@"latitude"] = latitude;
+            userInfo[@"longitude"] = longitude;
+            activity.userInfo = userInfo;
+        }
     }
     
     return activity;
@@ -360,6 +363,20 @@ __attribute__((annotate("returns_localized_nsstring"))) static inline NSString *
 
 - (nullable NSNumber *)wmf_longitude {
     return self.userInfo[@"longitude"];
+}
+
++ (nullable NSNumber *)wmf_numberFromString:(nullable NSString *)string {
+    if (string.length == 0) {
+        return nil;
+    }
+
+    NSScanner *scanner = [NSScanner scannerWithString:string];
+    double value = 0;
+    if (![scanner scanDouble:&value] || !scanner.isAtEnd) {
+        return nil;
+    }
+
+    return @(value);
 }
 
 @end
