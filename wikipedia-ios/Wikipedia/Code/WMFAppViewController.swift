@@ -1130,6 +1130,9 @@ final class WMFAppViewController: UITabBarController, AppTabBarDelegate {
             if let articleURL = activity.wmf_linkURL() {
                 placesViewController.updateViewModeToMap()
                 placesViewController.showArticleURL(articleURL)
+            } else if let latitude = activity.wmf_latitude(), let longitude = activity.wmf_longitude() {
+                placesViewController.updateViewModeToMap()
+                placesViewController.showLocation(latitude: latitude.doubleValue, longitude: longitude.doubleValue)
             }
 
         case .random:
