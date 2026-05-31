@@ -5,6 +5,7 @@ class PlacesViewModel {
 
     private let locationService: LocationsService
     private let deepLinkOpener: DeepLinkOpener
+    private var isFetching = false
 
     var state: PlacesViewState
 
@@ -28,6 +29,10 @@ class PlacesViewModel {
     }
 
     private func fetchLocations() async {
+        guard !isFetching else { return }
+        isFetching = true
+        defer { isFetching = false }
+
         state = PlacesViewState(.loading)
 
         do {
