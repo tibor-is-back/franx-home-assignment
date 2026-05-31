@@ -35,8 +35,7 @@ class PlacesViewModel {
             if locations.isEmpty {
                 state = PlacesViewState(.noPlaces)
             } else {
-                let places = await processPlaces(locations)
-                state = PlacesViewState(.loaded(places))
+                state = PlacesViewState(.loaded(processPlaces(locations)))
             }
         } catch {
             switch error {
@@ -50,7 +49,7 @@ class PlacesViewModel {
         }
     }
 
-    nonisolated private func processPlaces(_ places: [LocationDTO]) -> [PlaceViewData] {
+    private func processPlaces(_ places: [LocationDTO]) -> [PlaceViewData] {
         places.map {
             PlaceViewData(locationName: $0.name ?? Constants.Places.Strings.unknownLocation,
                           latitude: "\($0.lat)",

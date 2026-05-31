@@ -13,7 +13,7 @@ final class DefaultDeepLinkOpener: DeepLinkOpener {
     func openLocation(latitude: String, longitude: String) throws(DeepLinkOpenerError) {
 
         guard let url = URL(
-            string: "wikipedia://places?lat=\(latitude)&lon=\(longitude)"
+            string: "wikipedia://places?latitude=\(latitude)&longitude=\(longitude)"
         ) else {
             assertionFailure("Failed to construct deep link URL")
             return

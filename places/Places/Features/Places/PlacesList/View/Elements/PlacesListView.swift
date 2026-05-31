@@ -6,7 +6,8 @@ struct PlacesListView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            ForEach(Array(places.enumerated()), id: \.element.id) { index, place in
+            ForEach(places.indices, id: \.self) { index in
+                let place = places[index]
                 Button {
                     onPlaceTap(place)
                 } label: {
