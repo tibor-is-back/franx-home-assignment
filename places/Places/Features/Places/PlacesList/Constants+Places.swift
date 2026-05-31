@@ -1,7 +1,5 @@
 // swiftlint:disable nesting
 
-enum Constants { }
-
 extension Constants {
     enum Places {
         enum Strings {

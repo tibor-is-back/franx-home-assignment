@@ -15,6 +15,7 @@ struct PlaceIconView: View {
             )
             .background(continent.color.opacity(DesignSystem.Opacity.iconBackground))
             .clipShape(RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium))
+            .accessibilityHidden(true)
     }
 }
 

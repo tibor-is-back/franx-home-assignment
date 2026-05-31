@@ -16,6 +16,8 @@ struct ToastView: View {
                 .foregroundStyle(DesignSystem.Colors.error)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
+                .accessibilityIdentifier(AccessibilityIdentifier.Common.toastMessage)
+                .accessibilityLabel(message)
 
             Button(action: onDismiss) {
                 Image(systemName: "xmark")
@@ -25,8 +27,10 @@ struct ToastView: View {
             }
             .buttonStyle(.plain)
             .accessibilityLabel("Dismiss")
+            .accessibilityIdentifier(AccessibilityIdentifier.Common.toastDismiss)
         }
         .padding(DesignSystem.Spacing.medium)
+        .accessibilityIdentifier(AccessibilityIdentifier.Common.toast)
         .background(DesignSystem.Colors.error.opacity(DesignSystem.Opacity.iconBackground))
         .clipShape(RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium))
         .overlay {

@@ -4,5 +4,6 @@ struct PlaceViewData: Equatable {
     let longitude: String
     let continent: Continent
 
+    var id: String { "\(locationName)-\(latitude)-\(longitude)" }
     var coordinatesLabel: String { "\(latitude), \(longitude)" }
 }

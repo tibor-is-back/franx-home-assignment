@@ -26,6 +26,7 @@ struct PlacesView: View {
             }
             .navigationTitle("Places")
             .navigationBarTitleDisplayMode(.large)
+            .accessibilityIdentifier(AccessibilityIdentifier.Places.root)
         }
         .task {
             await viewModel.handleEvent(.viewAppeared)
@@ -38,6 +39,7 @@ struct PlacesView: View {
         case .loading:
             LoadingView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .accessibilityIdentifier(AccessibilityIdentifier.Places.loading)
         case .loaded(let places):
             ScrollView {
                 PlacesListView(places: places) { place in
@@ -45,6 +47,7 @@ struct PlacesView: View {
                 }
                 .padding(DesignSystem.Spacing.medium)
             }
+            .accessibilityIdentifier(AccessibilityIdentifier.Places.list)
         case .noPlaces:
             ContentUnavailableView(
                 Constants.Places.Strings.noLocationsTitle,
@@ -52,6 +55,7 @@ struct PlacesView: View {
                 description: Text(Constants.Places.Strings.noLocationsDescription)
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .accessibilityIdentifier(AccessibilityIdentifier.Places.empty)
         case .error(let title, let subtitle):
             ErrorView(
                 title: title,
@@ -64,6 +68,7 @@ struct PlacesView: View {
             }
             .padding(DesignSystem.Spacing.medium)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .accessibilityIdentifier(AccessibilityIdentifier.Places.error)
         }
     }
 

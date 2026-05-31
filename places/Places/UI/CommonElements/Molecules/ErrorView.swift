@@ -38,8 +38,10 @@ struct ErrorView: View {
             if let onRetry {
                 Button(retryTitle, action: onRetry)
                     .buttonStyle(.secondary)
+                    .accessibilityIdentifier(AccessibilityIdentifier.Common.errorRetry)
             }
         }
+        .accessibilityIdentifier(AccessibilityIdentifier.Common.error)
     }
 }
 

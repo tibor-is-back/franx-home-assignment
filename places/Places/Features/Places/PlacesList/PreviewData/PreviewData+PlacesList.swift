@@ -1,7 +1,5 @@
 import Foundation
 
-enum PreviewData { }
-
 extension PreviewData {
 
     enum Places {

@@ -14,6 +14,8 @@ struct PlacesListView: View {
                     PlacesListItemView(place: place)
                 }
                 .buttonStyle(.plain)
+                .accessibilityIdentifier(AccessibilityIdentifier.Places.listItem(id: place.id))
+                .accessibilityLabel("\(place.locationName), \(place.coordinatesLabel)")
 
                 if index < places.count - 1 {
                     Divider()
