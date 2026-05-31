@@ -11,6 +11,7 @@ enum DesignSystem {
         static let primaryText = Color.primary
         static let secondaryText = Color.secondary
         static let tertiaryText = Color(.tertiaryLabel)
+        static let error = Color.red
 
         static let separator = Color(.separator)
 
@@ -37,10 +38,10 @@ enum DesignSystem {
 
     enum Size {
         static let icon: CGFloat = 24
+        static let iconContainer: CGFloat = 40
 
         static let image: CGFloat = 64
 
-        static let locationIconContainer: CGFloat = 40
         static let rowHeight: CGFloat = 72
         static let chevronSize: CGFloat = 14
     }
@@ -59,5 +60,10 @@ enum DesignSystem {
         static let full: Double = 1
         static let pressedFilled: Double = 0.85
         static let pressedPlain: Double = 0.6
+        static let iconBackground: Double = 0.15
+    }
+
+    enum Toast {
+        static let dismissDelay: Duration = .seconds(3)
     }
 }

@@ -4,7 +4,14 @@ import SwiftUI
 struct PlacesApp: App {
     var body: some Scene {
         WindowGroup {
-            PlacesView()
+            PlacesView(
+                viewModel: PlacesViewModel(
+                    locationService: DefaultLocationsService(
+                        networkClient: URLSessionNetworkClient()
+                    ),
+                    deepLinkOpener: DefaultDeepLinkOpener()
+                )
+            )
         }
     }
 }

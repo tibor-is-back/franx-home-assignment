@@ -10,7 +10,7 @@ nonisolated final class URLSessionNetworkClient: NetworkClient {
     init(session: URLSession = .shared) {
         self.session = session
     }
-    
+
     func fetch<T: Decodable>(_ request: URLRequest) async throws(NetworkError) -> T {
         let data: Data
         let response: URLResponse

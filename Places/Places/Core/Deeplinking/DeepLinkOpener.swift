@@ -9,7 +9,7 @@ protocol DeepLinkOpener {
 }
 
 final class DefaultDeepLinkOpener: DeepLinkOpener {
-    
+
     func openLocation(latitude: String, longitude: String) throws(DeepLinkOpenerError) {
 
         guard let url = URL(

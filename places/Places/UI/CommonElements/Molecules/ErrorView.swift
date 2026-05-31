@@ -3,6 +3,20 @@ import SwiftUI
 struct ErrorView: View {
     let title: String
     let subtitle: String?
+    let retryTitle: String
+    let onRetry: (() -> Void)?
+
+    init(
+        title: String,
+        subtitle: String?,
+        retryTitle: String = "Retry",
+        onRetry: (() -> Void)? = nil
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.retryTitle = retryTitle
+        self.onRetry = onRetry
+    }
 
     var body: some View {
         VStack(spacing: DesignSystem.Spacing.medium) {
@@ -21,21 +35,18 @@ struct ErrorView: View {
                     .foregroundStyle(DesignSystem.Colors.secondaryText)
                     .accessibilityLabel(subtitle)
             }
+            if let onRetry {
+                Button(retryTitle, action: onRetry)
+                    .buttonStyle(.secondary)
+            }
         }
     }
 }
 
-#Preview("Light") {
-    VStack {
-        ErrorView(title: "Test Error", subtitle: "")
-        ErrorView(title: "Test Error", subtitle: "There was a problem.")
-    }
+#Preview("With retry") {
+    ErrorView(title: "Test Error", subtitle: "There was a problem.", onRetry: {})
 }
 
-#Preview("Dark") {
-    VStack {
-        ErrorView(title: "Test Error", subtitle: "")
-        ErrorView(title: "Test Error", subtitle: "There was a problem.")
-    }
-    .preferredColorScheme(.dark)
+#Preview("Without retry") {
+    ErrorView(title: "Test Error", subtitle: "There was a problem.")
 }
