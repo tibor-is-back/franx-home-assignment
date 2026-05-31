@@ -12,6 +12,7 @@ struct PlacesApp: App {
                     deepLinkOpener: DefaultDeepLinkOpener()
                 )
             )
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }

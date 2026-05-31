@@ -1,10 +1,3 @@
-//
-//  PlacesUITestsLaunchTests.swift
-//  PlacesUITests
-//
-//  Created by Kántor Tibor on 30/05/2026.
-//
-
 import XCTest
 
 final class PlacesUITestsLaunchTests: XCTestCase {

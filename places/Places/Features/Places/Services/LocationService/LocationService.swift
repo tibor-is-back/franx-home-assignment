@@ -13,7 +13,8 @@ nonisolated final class DefaultLocationsService: LocationsService {
 
     func fetchLocations() async throws(LocationsServiceError) -> [LocationDTO] {
         do {
-            return try await networkClient.fetch(LocationEndpoint.locations.urlRequest)
+            let response: LocationResponse = try await networkClient.fetch(LocationEndpoint.locations.urlRequest)
+            return response.locations
         } catch {
             throw mapNetworkError(error)
         }

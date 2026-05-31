@@ -4,11 +4,12 @@ import Testing
 
 struct LocationServiceTests {
     @Test
-    func givenNetworkClientReturnsLocations_whenFetchLocations_thenReturnsThoseLocationsAndRequestsLocationsEndpoint() async throws {
+    func givenLocationResponse_whenFetchLocations_thenReturnsLocationsAndRequestsEndpoint() async throws {
         // Given
-        let locations = [LocationDTO(name: "Amsterdam", lat: 52.3676, long: 4.9041)]
         let networkClient = MockNetworkClient()
-        networkClient.locations = locations
+        networkClient.response = LocationResponse(
+            locations: [LocationDTO(name: "Amsterdam", lat: 52.3676, long: 4.9041)]
+        )
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // When
@@ -121,7 +122,7 @@ struct LocationServiceTests {
 }
 
 private final class MockNetworkClient: NetworkClient {
-    var locations: [LocationDTO] = []
+    var response: LocationResponse?
     var error: NetworkError?
     private(set) var lastRequest: URLRequest?
 
@@ -130,9 +131,9 @@ private final class MockNetworkClient: NetworkClient {
         if let error {
             throw error
         }
-        guard let locations = locations as? T else {
+        guard let response = response as? T else {
             throw NetworkError.decodingError(URLError(.cannotDecodeContentData))
         }
-        return locations
+        return response
     }
 }

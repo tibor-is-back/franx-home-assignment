@@ -1,12 +1,5 @@
 import SwiftUI
 
-enum PlacesViewEvent {
-    case viewAppeared
-    case retryTapped
-    case placeTapped(PlaceViewData)
-    case dismissToast
-}
-
 @Observable
 class PlacesViewModel {
 
@@ -42,7 +35,8 @@ class PlacesViewModel {
             if locations.isEmpty {
                 state = PlacesViewState(.noPlaces)
             } else {
-                state = PlacesViewState(.loaded(processPlaces(locations)))
+                let places = await processPlaces(locations)
+                state = PlacesViewState(.loaded(places))
             }
         } catch {
             switch error {
@@ -56,7 +50,7 @@ class PlacesViewModel {
         }
     }
 
-    private func processPlaces(_ places: [LocationDTO]) -> [PlaceViewData] {
+    nonisolated private func processPlaces(_ places: [LocationDTO]) -> [PlaceViewData] {
         places.map {
             PlaceViewData(locationName: $0.name ?? Constants.Places.Strings.unknownLocation,
                           latitude: "\($0.lat)",
