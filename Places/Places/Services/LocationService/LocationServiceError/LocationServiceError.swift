@@ -1,5 +1,5 @@
 enum LocationsServiceError: Error, Equatable {
-    case offline   
+    case offline
     case serverError
     case invalidData
 }

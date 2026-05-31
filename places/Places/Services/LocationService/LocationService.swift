@@ -18,7 +18,7 @@ nonisolated final class DefaultLocationsService: LocationsService {
             throw mapNetworkError(error)
         }
     }
-    
+
     private func mapNetworkError(_ error: NetworkError) -> LocationsServiceError {
         switch error {
         case .transportError(let urlError):

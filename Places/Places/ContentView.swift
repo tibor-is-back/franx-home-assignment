@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Places
-//
-//  Created by Kántor Tibor on 30/05/2026.
-//
-
 import SwiftUI
 
 struct ContentView: View {
