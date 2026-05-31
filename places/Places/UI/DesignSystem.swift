@@ -60,6 +60,7 @@ enum DesignSystem {
         static let full: Double = 1
         static let pressedFilled: Double = 0.85
         static let pressedPlain: Double = 0.6
+        static let disabled: Double = 0.4
         static let iconBackground: Double = 0.15
     }
 
