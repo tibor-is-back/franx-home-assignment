@@ -5,12 +5,18 @@ protocol NetworkClient {
 }
 
 nonisolated final class URLSessionNetworkClient: NetworkClient {
+    private let session: URLSession
+
+    init(session: URLSession = .shared) {
+        self.session = session
+    }
+    
     func fetch<T: Decodable>(_ request: URLRequest) async throws(NetworkError) -> T {
         let data: Data
         let response: URLResponse
 
         do {
-            (data, response) = try await URLSession.shared.data(for: request)
+            (data, response) = try await session.data(for: request)
         } catch let error as URLError {
             throw .transportError(error)
         } catch {
