@@ -35,7 +35,34 @@ class PlacesViewModel {
     }
 
     private func fetchLocations() async {
+        state = PlacesViewState(.loading)
 
+        do {
+            let locations = try await locationService.fetchLocations()
+            if locations.isEmpty {
+                state = PlacesViewState(.noPlaces)
+            } else {
+                state = PlacesViewState(.loaded(processPlaces(locations)))
+            }
+        } catch {
+            switch error {
+            case .serverError, .invalidData:
+                state = PlacesViewState(.error(title: Constants.Places.Strings.generalErrorTitle,
+                                               subtitle: Constants.Places.Strings.generalErrorSubtitle))
+            case .offline:
+                state = PlacesViewState(.error(title: Constants.Places.Strings.noInternetErrorTitle,
+                                               subtitle: Constants.Places.Strings.noInternetErrorSubtitle))
+            }
+        }
+    }
+
+    private func processPlaces(_ places: [LocationDTO]) -> [PlaceViewData] {
+        places.map {
+            PlaceViewData(locationName: $0.name ?? Constants.Places.Strings.unknownLocation,
+                          latitude: "\($0.lat)",
+                          longitude: "\($0.long)",
+                          continent: Continent.from(latitude: $0.lat, longitude: $0.long))
+        }
     }
 
     private func handlePlacesTap(for place: PlaceViewData) {
