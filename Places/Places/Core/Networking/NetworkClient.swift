@@ -4,7 +4,7 @@ protocol NetworkClient {
     func fetch<T: Decodable>(_ request: URLRequest) async throws(NetworkError) -> T
 }
 
-final class URLSessionNetworkClient: NetworkClient {
+nonisolated final class URLSessionNetworkClient: NetworkClient {
     func fetch<T: Decodable>(_ request: URLRequest) async throws(NetworkError) -> T {
         let data: Data
         let response: URLResponse

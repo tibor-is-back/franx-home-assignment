@@ -251,7 +251,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if test -d \"/opt/homebrew/bin\"; then\n  PATH=\"/opt/homebrew/bin:$PATH\"\nfi\nif test -d \"/usr/local/bin\"; then\n  PATH=\"/usr/local/bin:$PATH\"\nfi\nif command -v swiftlint >/dev/null; then\n  cd \"${SRCROOT}\" && swiftlint lint --config swiftlint.yaml\nelse\n  echo \"warning: SwiftLint not installed. Install with: brew install swiftlint\"\nfi\n";
+			shellScript = "if test -d \"/opt/homebrew/bin\"; then\n  PATH=\"/opt/homebrew/bin:$PATH\"\nfi\nif test -d \"/usr/local/bin\"; then\n  PATH=\"/usr/local/bin:$PATH\"\nfi\nif command -v swiftlint >/dev/null; then\n  cd \"${SRCROOT}\" && swiftlint lint --config .swiftlint.yaml\nelse\n  echo \"warning: SwiftLint not installed. Install with: brew install swiftlint\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -437,11 +437,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -469,11 +472,14 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 6.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -490,10 +496,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tibor.cantor.PlacesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Places.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Places";
 			};
 			name = Debug;
@@ -511,10 +520,13 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.tibor.cantor.PlacesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Places.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Places";
 			};
 			name = Release;
