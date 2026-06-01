@@ -132,6 +132,17 @@ xcrun simctl openurl booted "wikipedia://places?latitude=51.5074&longitude=-0.12
 xcrun simctl openurl booted "wikipedia://places?latitude=52.3676&longitude=4.9041"
 ```
 
+## End-to-end test
+
+Use the **same simulator or iPhone** for both apps.
+
+1. Build and run **Wikipedia** from `wikipedia-ios/Wikipedia.xcodeproj` (Wikipedia scheme).
+2. Build and run **Places** from `places/Places.xcodeproj` (Places scheme).
+3. In **Places**, pick a location from the list or enter coordinates on the manual screen.
+4. Wikipedia should open on the **Places** tab and centre the map on that location (not your current GPS position).
+
+If Wikipedia is not installed on that simulator or device, Places shows an error instead.
+
 ## Usage of AI
 
 AI-assisted tools (Cursor and Codex) were used for the following tasks:
