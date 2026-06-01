@@ -11,11 +11,11 @@ iOS home assignment: a **Places** companion app and a modified **Wikipedia** app
 
 ### App features
 
-* Dowloads list of Locations according to the assignment, handles edges cases such errors or empty list
-* Manually provide coordinates through a separate screen
-* Opens the Wikipedia app if available, shows error if Wikipedia app not available
+* Downloads a list of locations according to the assignment; handles edge cases such as errors or an empty list
+* Lets users enter coordinates manually on a separate screen
+* Opens the Wikipedia app when available; shows an error if the Wikipedia app is not available
 
-GIFS
+GIFs
 
 ### Implementation details
 
@@ -110,7 +110,7 @@ wikipedia://places?latitude=52.3676&longitude=4.9041   # Amsterdam
 
 **Simulator (bash):**
 
-Run Wikipedia on the simulator then in the terminal run one of the following commands:
+Run Wikipedia on the simulator, then in the terminal run one of the following commands:
 
 ```bash
 # London
@@ -123,6 +123,6 @@ xcrun simctl openurl booted "wikipedia://places?latitude=52.3676&longitude=4.904
 
 AI-assisted tools (Cursor and Codex) were used for the following tasks:
 * Generating SwiftUI preview data
-* Help with writing unit and UI tests
+* Helping write unit and UI tests
 * Assisting with general refactoring
 * Generating simple code snippets for trivial parts
