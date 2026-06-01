@@ -23,6 +23,7 @@ final class ManualPlaceViewModel {
 
     private let deepLinkOpener: DeepLinkOpener
 
+    init(deepLinkOpener: DeepLinkOpener) {
         self.deepLinkOpener = deepLinkOpener
     }
 
