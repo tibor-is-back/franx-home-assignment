@@ -35,6 +35,7 @@ struct ToastView: View {
         .padding(DesignSystem.Spacing.medium)
         .accessibilityIdentifier(AccessibilityIdentifier.Common.toast)
         .background(DesignSystem.Colors.error.opacity(DesignSystem.Opacity.iconBackground))
+        .background { background }
         .clipShape(RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium))
         .overlay {
             RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium)
@@ -51,6 +52,11 @@ struct ToastView: View {
             guard !Task.isCancelled else { return }
             dismiss()
         }
+    }
+
+    private var background: some View {
+        RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium)
+            .fill(DesignSystem.Colors.surface)
     }
 
     private func dismiss() {

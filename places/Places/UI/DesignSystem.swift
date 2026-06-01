@@ -6,6 +6,7 @@ enum DesignSystem {
         static let onPrimary = Color.white
 
         static let screenBackground = Color(.systemGroupedBackground)
+        static let surface = Color(.secondarySystemGroupedBackground)
         static let cardBackground = Color(.secondarySystemGroupedBackground)
 
         static let primaryText = Color.primary
