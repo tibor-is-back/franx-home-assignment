@@ -1,6 +1,6 @@
 # Franx / ABN AMRO Home Assignment
 
-This repository contains the iOS home assignment for Franx / ABM Amro. The **Places** companion app and a modified **Wikipedia** app.
+This repository contains the iOS home assignment for Franx / ABN Amro. The **Places** companion app and a modified **Wikipedia** app.
 
 ## Repository structure
 
