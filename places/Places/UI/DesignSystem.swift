@@ -66,5 +66,6 @@ enum DesignSystem {
 
     enum Toast {
         static let dismissDelay: Duration = .seconds(3)
+        static let fadeAnimation = Animation.easeInOut(duration: 0.25)
     }
 }

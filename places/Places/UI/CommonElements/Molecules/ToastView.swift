@@ -4,6 +4,8 @@ struct ToastView: View {
     let message: String
     let onDismiss: () -> Void
 
+    @State private var opacity: Double = 0
+
     var body: some View {
         HStack(alignment: .center, spacing: DesignSystem.Spacing.small) {
             Image(systemName: "nosign")
@@ -19,7 +21,7 @@ struct ToastView: View {
                 .accessibilityIdentifier(AccessibilityIdentifier.Common.toastMessage)
                 .accessibilityLabel(message)
 
-            Button(action: onDismiss) {
+            Button(action: dismiss) {
                 Image(systemName: "xmark")
                     .font(.system(size: DesignSystem.Size.chevronSize, weight: .semibold))
                     .foregroundStyle(DesignSystem.Colors.error.opacity(DesignSystem.Opacity.pressedPlain))
@@ -39,6 +41,25 @@ struct ToastView: View {
         }
         .padding(.horizontal, DesignSystem.Spacing.medium)
         .padding(.bottom, DesignSystem.Spacing.medium)
+        .opacity(opacity)
+        .onAppear {
+            withAnimation(DesignSystem.Toast.fadeAnimation) {
+                opacity = 1
+            }
+        }
+        .task(id: message) {
+            try? await Task.sleep(for: DesignSystem.Toast.dismissDelay)
+            guard !Task.isCancelled else { return }
+            dismiss()
+        }
+    }
+
+    private func dismiss() {
+        withAnimation(DesignSystem.Toast.fadeAnimation) {
+            opacity = 0
+        } completion: {
+            onDismiss()
+        }
     }
 }
 

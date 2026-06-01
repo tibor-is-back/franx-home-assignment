@@ -59,13 +59,10 @@ struct ManualPlaceView: View {
                 .background(DesignSystem.Colors.screenBackground)
 
                 if let message = viewModel.toastMessage {
-                    ToastView(message: message) {
-                        dismissToast()
-                    }
-                    .task(id: message) {
-                        try? await Task.sleep(for: DesignSystem.Toast.dismissDelay)
-                        dismissToast()
-                    }
+                    ToastView(
+                        message: message,
+                        onDismiss: { viewModel.handleEvent(.toastDismissed) }
+                    )
                 }
             }
             .navigationTitle(Constants.ManualPlace.Strings.title)
@@ -74,9 +71,6 @@ struct ManualPlaceView: View {
         }
     }
 
-    private func dismissToast() {
-        viewModel.handleEvent(.toastDismissed)
-    }
 }
 
 #Preview {

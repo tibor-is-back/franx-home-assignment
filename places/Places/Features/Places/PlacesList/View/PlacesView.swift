@@ -24,13 +24,7 @@ struct PlacesView: View {
                     .background(DesignSystem.Colors.screenBackground)
 
                 if case .toast(let message) = viewModel.state.overlay {
-                    ToastView(message: message) {
-                        Task { await dismissToast() }
-                    }
-                    .task(id: message) {
-                        try? await Task.sleep(for: DesignSystem.Toast.dismissDelay)
-                        await dismissToast()
-                    }
+                    ToastView(message: message, onDismiss: { viewModel.dismissToast() })
                 }
             }
             .navigationTitle(Constants.Places.Strings.title)
@@ -92,9 +86,6 @@ struct PlacesView: View {
         }
     }
 
-    private func dismissToast() async {
-        await viewModel.handleEvent(.dismissToast)
-    }
 }
 
 #Preview("Loaded") {
