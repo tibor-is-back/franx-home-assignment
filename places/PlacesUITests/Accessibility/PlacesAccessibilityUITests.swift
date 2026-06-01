@@ -7,6 +7,14 @@ final class PlacesAccessibilityUITests: XCTestCase {
     }
 
     @MainActor
+    private func performAuditLoggingIssues(in app: XCUIApplication) throws {
+        try app.performAccessibilityAudit { issue in
+            print("Issue: \(issue)")
+            return false
+        }
+    }
+
+    @MainActor
     func test_givenLoadedPlacesList_whenViewAppeared_thenPassesAccessibilityAudit() throws {
         // Given
         let app = XCUIApplication()
@@ -15,7 +23,7 @@ final class PlacesAccessibilityUITests: XCTestCase {
         app.waitForExistence(ofIdentifier: UITestAccessibility.Places.sanFranciscoListItem)
 
         // Then
-        try app.performAccessibilityAudit()
+        try performAuditLoggingIssues(in: app)
     }
 
     @MainActor
@@ -27,7 +35,7 @@ final class PlacesAccessibilityUITests: XCTestCase {
         app.waitForExistence(ofIdentifier: UITestAccessibility.Places.empty)
 
         // Then
-        try app.performAccessibilityAudit()
+        try performAuditLoggingIssues(in: app)
     }
 
     @MainActor
@@ -39,7 +47,7 @@ final class PlacesAccessibilityUITests: XCTestCase {
         app.waitForExistence(ofIdentifier: UITestAccessibility.Common.errorRetry)
 
         // Then
-        try app.performAccessibilityAudit()
+        try performAuditLoggingIssues(in: app)
     }
 
     @MainActor
@@ -52,6 +60,6 @@ final class PlacesAccessibilityUITests: XCTestCase {
         app.waitForExistence(ofIdentifier: UITestAccessibility.ManualPlace.latitudeField)
 
         // Then
-        try app.performAccessibilityAudit()
+        try performAuditLoggingIssues(in: app)
     }
 }
