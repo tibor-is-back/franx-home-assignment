@@ -45,6 +45,11 @@
 			path = PlacesUITests;
 			sourceTree = "<group>";
 		};
+		75DC4E402FCB481000C4FF84 /* Test Plans */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Test Plans";
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +83,7 @@
 				75DC4DFB2FCB480E00C4FF84 /* Places */,
 				75DC4E092FCB480F00C4FF84 /* PlacesTests */,
 				75DC4E132FCB480F00C4FF84 /* PlacesUITests */,
+				75DC4E402FCB481000C4FF84 /* Test Plans */,
 				75DC4DFA2FCB480E00C4FF84 /* Products */,
 			);
 			sourceTree = "<group>";

@@ -18,6 +18,11 @@
   },
   "testTargets" : [
     {
+      "parallelizable" : false,
+      "selectedTests" : [
+        "PlacesViewUITests",
+        "ManualPlaceViewUITests"
+      ],
       "target" : {
         "containerPath" : "container:Places.xcodeproj",
         "identifier" : "75DC4E0F2FCB480F00C4FF84",
