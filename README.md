@@ -48,7 +48,8 @@ This repository contains the iOS home assignment for Franx / ABN Amro. The **Pla
 
 * No unit tests were added for the service layer, as mocking `URLProtocol` and `UIApplication` would add significant overhead for a small assignment
 * No use case layer was introduced because it would not contain any business logic
-* View data mapping in `PlacesViewModel` is performed after the `await` call. The operation is O(n) on a small dataset, but could be moved to a nonisolated context if the processing became more expensive
+* View data mapping in `PlacesViewModel` runs on the main actor after the await call resumes. For the current small dataset this O(n) work is negligible, but if it became expensive it could be moved off the main actor with a `@concurrent`.
+* A separate branch named `spike/pre-approachable-concurrency` is included in this repository. It contains an implementation using the concurrency model and isolation patterns that were commonly used before Swift 6.2's Approachable Concurrency defaults. The branch was created as a learning exercise and as a reference point to illustrate the differences introduced by Swift 6.2.
 
 #### Project folder structure
 
