@@ -35,10 +35,13 @@ struct PlacesView: View {
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(Constants.Places.Strings.manualPlace) {
+                    Button {
                         isManualPlacePresented = true
+                    } label: {
+                        Label(Constants.Places.Strings.manualPlace, systemImage: "location")
                     }
                     .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Constants.Places.Strings.manualPlace)
                     .accessibilityIdentifier(AccessibilityIdentifier.Places.manualPlaceButton)
                 }
             }
@@ -83,6 +86,7 @@ struct PlacesView: View {
                 }
                 .buttonStyle(.secondary)
                 .accessibilityElement(children: .ignore)
+                .accessibilityLabel(Constants.Places.Strings.retry)
                 .accessibilityIdentifier(AccessibilityIdentifier.Common.errorRetry)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)

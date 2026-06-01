@@ -6,18 +6,13 @@ struct PrimaryButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .font(DesignSystem.Fonts.body.weight(.semibold))
-            .foregroundStyle(DesignSystem.Colors.onPrimary)
+            .foregroundStyle(isEnabled ? DesignSystem.Colors.onPrimary : Color(.secondaryLabel))
             .frame(maxWidth: .infinity)
             .padding(.horizontal, DesignSystem.Spacing.medium)
             .padding(.vertical, DesignSystem.Spacing.medium)
-            .background(DesignSystem.Colors.primary)
+            .background(isEnabled ? DesignSystem.Colors.primary : Color(.systemGray4))
             .clipShape(RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.small))
-            .opacity(opacity(isPressed: configuration.isPressed))
-    }
-
-    private func opacity(isPressed: Bool) -> Double {
-        guard isEnabled else { return DesignSystem.Opacity.disabled }
-        return isPressed ? DesignSystem.Opacity.pressedFilled : DesignSystem.Opacity.full
+            .opacity(isEnabled && configuration.isPressed ? DesignSystem.Opacity.pressedFilled : DesignSystem.Opacity.full)
     }
 }
 

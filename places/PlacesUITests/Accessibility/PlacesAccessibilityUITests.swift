@@ -10,6 +10,8 @@ final class PlacesAccessibilityUITests: XCTestCase {
     private func performAuditLoggingIssues(in app: XCUIApplication) throws {
         try app.performAccessibilityAudit { issue in
             print("Issue: \(issue)")
+            print(issue.auditType)
+            print(issue.compactDescription)
             return false
         }
     }

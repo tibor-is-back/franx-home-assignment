@@ -11,23 +11,22 @@ struct PlacesListItemView: View {
                 Text(place.locationName)
                     .font(DesignSystem.Fonts.headline)
                     .foregroundStyle(DesignSystem.Colors.primaryText)
-                    .lineLimit(1)
 
                 Text(place.coordinatesLabel)
                     .font(DesignSystem.Fonts.subheadline)
                     .foregroundStyle(DesignSystem.Colors.secondaryText)
-                    .lineLimit(1)
             }
 
             Spacer(minLength: DesignSystem.Spacing.small)
 
             Image(systemName: "chevron.right")
-                .font(.system(size: DesignSystem.Size.chevronSize, weight: .semibold))
+                .font(.caption.weight(.semibold))
                 .foregroundStyle(DesignSystem.Colors.tertiaryText)
                 .accessibilityHidden(true)
         }
-        .frame(height: DesignSystem.Size.rowHeight)
+        .frame(minHeight: DesignSystem.Size.rowHeight)
         .padding(.horizontal, DesignSystem.Spacing.medium)
+        .padding(.vertical, DesignSystem.Spacing.small)
         .contentShape(Rectangle())
     }
 }
