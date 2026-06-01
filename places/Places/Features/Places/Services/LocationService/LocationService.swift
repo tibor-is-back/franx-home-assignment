@@ -1,16 +1,18 @@
 import Foundation
 
-protocol LocationsService {
+protocol LocationsService: Sendable {
+    @concurrent
     func fetchLocations() async throws(LocationsServiceError) -> [LocationDTO]
 }
 
-nonisolated final class DefaultLocationsService: LocationsService {
+nonisolated final class DefaultLocationsService: LocationsService, Sendable {
     private let networkClient: NetworkClient
 
     init(networkClient: NetworkClient) {
         self.networkClient = networkClient
     }
 
+    @concurrent
     func fetchLocations() async throws(LocationsServiceError) -> [LocationDTO] {
         do {
             let response: LocationResponse = try await networkClient.fetch(LocationEndpoint.locations.urlRequest)

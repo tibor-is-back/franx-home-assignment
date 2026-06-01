@@ -1,4 +1,4 @@
-enum LocationsServiceError: Error, Equatable {
+enum LocationsServiceError: Error, Equatable, Sendable {
     case offline
     case serverError
     case invalidData

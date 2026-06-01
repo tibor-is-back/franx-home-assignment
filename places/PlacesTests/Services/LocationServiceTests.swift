@@ -6,9 +6,10 @@ struct LocationServiceTests {
     @Test
     func givenLocationResponse_whenFetchLocations_thenReturnsLocationsAndRequestsEndpoint() async throws {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.response = LocationResponse(
-            locations: [LocationDTO(name: "Amsterdam", lat: 52.3676, long: 4.9041)]
+        let networkClient = MockNetworkClient(
+            response: LocationResponse(
+                locations: [LocationDTO(name: "Amsterdam", lat: 52.3676, long: 4.9041)]
+            )
         )
         let sut = DefaultLocationsService(networkClient: networkClient)
 
@@ -20,14 +21,17 @@ struct LocationServiceTests {
         #expect(result[0].name == "Amsterdam")
         #expect(result[0].lat == 52.3676)
         #expect(result[0].long == 4.9041)
-        #expect(networkClient.lastRequest?.url?.absoluteString.contains("locations.json") == true)
+        #expect(
+            LocationEndpoint.locations.urlRequest.url?.absoluteString.contains("locations.json") == true
+        )
     }
 
     @Test
     func givenNotConnectedToInternet_whenFetchLocations_thenThrowsOffline() async {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.error = .transportError(URLError(.notConnectedToInternet))
+        let networkClient = MockNetworkClient(
+            error: .transportError(URLError(.notConnectedToInternet))
+        )
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // Then
@@ -39,8 +43,9 @@ struct LocationServiceTests {
     @Test
     func givenNetworkConnectionLost_whenFetchLocations_thenThrowsOffline() async {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.error = .transportError(URLError(.networkConnectionLost))
+        let networkClient = MockNetworkClient(
+            error: .transportError(URLError(.networkConnectionLost))
+        )
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // When
@@ -53,8 +58,9 @@ struct LocationServiceTests {
     @Test
     func givenRequestTimedOut_whenFetchLocations_thenThrowsOffline() async {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.error = .transportError(URLError(.timedOut))
+        let networkClient = MockNetworkClient(
+            error: .transportError(URLError(.timedOut))
+        )
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // When
@@ -67,8 +73,9 @@ struct LocationServiceTests {
     @Test
     func givenCancelledTransportError_whenFetchLocations_thenThrowsServerError() async {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.error = .transportError(URLError(.cancelled))
+        let networkClient = MockNetworkClient(
+            error: .transportError(URLError(.cancelled))
+        )
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // When
@@ -81,8 +88,7 @@ struct LocationServiceTests {
     @Test
     func givenInvalidResponse_whenFetchLocations_thenThrowsServerError() async {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.error = .invalidResponse
+        let networkClient = MockNetworkClient(error: .invalidResponse)
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // When
@@ -95,8 +101,7 @@ struct LocationServiceTests {
     @Test
     func givenHTTP500_whenFetchLocations_thenThrowsServerError() async {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.error = .httpError(500)
+        let networkClient = MockNetworkClient(error: .httpError(500))
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // When
@@ -109,8 +114,7 @@ struct LocationServiceTests {
     @Test
     func givenDecodingError_whenFetchLocations_thenThrowsInvalidData() async {
         // Given
-        let networkClient = MockNetworkClient()
-        networkClient.error = .decodingError(URLError(.badURL))
+        let networkClient = MockNetworkClient(error: .decodingError(URLError(.badURL)))
         let sut = DefaultLocationsService(networkClient: networkClient)
 
         // When
@@ -121,13 +125,17 @@ struct LocationServiceTests {
     }
 }
 
-private final class MockNetworkClient: NetworkClient {
-    var response: LocationResponse?
-    var error: NetworkError?
-    private(set) var lastRequest: URLRequest?
+private struct MockNetworkClient: NetworkClient, Sendable {
+    let response: LocationResponse?
+    let error: NetworkError?
 
-    func fetch<T: Decodable>(_ request: URLRequest) async throws(NetworkError) -> T {
-        lastRequest = request
+    init(response: LocationResponse? = nil, error: NetworkError? = nil) {
+        self.response = response
+        self.error = error
+    }
+
+    @concurrent
+    func fetch<T: Decodable & Sendable>(_ request: URLRequest) async throws(NetworkError) -> T {
         if let error {
             throw error
         }

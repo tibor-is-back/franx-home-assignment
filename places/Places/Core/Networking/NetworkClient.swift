@@ -1,17 +1,19 @@
 import Foundation
 
-protocol NetworkClient {
-    func fetch<T: Decodable>(_ request: URLRequest) async throws(NetworkError) -> T
+protocol NetworkClient: Sendable {
+    @concurrent
+    func fetch<T: Decodable & Sendable>(_ request: URLRequest) async throws(NetworkError) -> T
 }
 
-nonisolated final class URLSessionNetworkClient: NetworkClient {
+nonisolated final class URLSessionNetworkClient: NetworkClient, Sendable {
     private let session: URLSession
 
     init(session: URLSession = .shared) {
         self.session = session
     }
 
-    func fetch<T: Decodable>(_ request: URLRequest) async throws(NetworkError) -> T {
+    @concurrent
+    func fetch<T: Decodable & Sendable>(_ request: URLRequest) async throws(NetworkError) -> T {
         let data: Data
         let response: URLResponse
 
