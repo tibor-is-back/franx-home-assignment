@@ -34,7 +34,7 @@ This repository contains the iOS home assignment for Franx / ABN Amro. The **Pla
 
 #### Features
 
-* Written in Swift 6.0 with default project settings of Xcode 26.4
+* Written in Swift 6.2 (with Approachable concurrency) and the default project settings of Xcode 26.4
 * Uses MVVM + Layered architecture (Presentation, Domain, Data)
 * Dependency injection throughout the application
 * Async/await-based implementation
