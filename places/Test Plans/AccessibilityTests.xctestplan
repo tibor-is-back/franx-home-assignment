@@ -1,0 +1,33 @@
+{
+  "configurations" : [
+    {
+      "id" : "C3D4E5F6-A7B8-4901-C234-56789ABCDEF0",
+      "name" : "Debug",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "maximumTestExecutionTimeAllowance" : 120,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Places.xcodeproj",
+      "identifier" : "75DC4DF82FCB480E00C4FF84",
+      "name" : "Places"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : false,
+      "selectedTests" : [
+        "PlacesAccessibilityUITests"
+      ],
+      "target" : {
+        "containerPath" : "container:Places.xcodeproj",
+        "identifier" : "75DC4E0F2FCB480F00C4FF84",
+        "name" : "PlacesUITests"
+      }
+    }
+  ],
+  "version" : 1
+}
