@@ -110,13 +110,12 @@ wikipedia://places?latitude=<lat>&longitude=<lon>
 
 **Tests:** `WikipediaUnitTests/Code/NSUserActivity+WMFExtensionsTest.m` (URL parsing).
 
-### Testing
+#### Testing
 
 Run Wikipedia on a **simulator or device**, then open a deep link:
 
 ```
 wikipedia://places?latitude=51.5074&longitude=-0.1278   # London
-wikipedia://places?latitude=52.3676&longitude=4.9041   # Amsterdam
 ```
 
 **Safari or Notes** — paste a link and tap it (works on simulator and device).
@@ -128,8 +127,6 @@ Run Wikipedia on the simulator, then in the terminal run one of the following co
 ```bash
 # London
 xcrun simctl openurl booted "wikipedia://places?latitude=51.5074&longitude=-0.1278"
-# Amsterdam
-xcrun simctl openurl booted "wikipedia://places?latitude=52.3676&longitude=4.9041"
 ```
 
 ## End-to-end test
