@@ -2,15 +2,11 @@ import SwiftUI
 
 @main
 struct PlacesApp: App {
-    private let deepLinkOpener = DefaultDeepLinkOpener()
-
     var body: some Scene {
         WindowGroup {
             PlacesView(
-                locationService: DefaultLocationsService(
-                    networkClient: URLSessionNetworkClient()
-                ),
-                deepLinkOpener: deepLinkOpener
+                locationService: AppDependencies.makeLocationsService(),
+                deepLinkOpener: AppDependencies.makeDeepLinkOpener()
             )
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
