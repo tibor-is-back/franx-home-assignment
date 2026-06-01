@@ -38,10 +38,10 @@ struct PlacesView: View {
                     Button(Constants.Places.Strings.manualPlace) {
                         isManualPlacePresented = true
                     }
+                    .accessibilityElement(children: .ignore)
                     .accessibilityIdentifier(AccessibilityIdentifier.Places.manualPlaceButton)
                 }
             }
-            .accessibilityIdentifier(AccessibilityIdentifier.Places.root)
         }
         .sheet(isPresented: $isManualPlacePresented) {
             ManualPlaceView(deepLinkOpener: deepLinkOpener)
@@ -57,7 +57,6 @@ struct PlacesView: View {
         case .loading:
             LoadingView()
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .accessibilityIdentifier(AccessibilityIdentifier.Places.loading)
         case .loaded(let places):
             ScrollView {
                 PlacesListView(places: places) { place in
@@ -65,7 +64,6 @@ struct PlacesView: View {
                 }
                 .padding(DesignSystem.Spacing.medium)
             }
-            .accessibilityIdentifier(AccessibilityIdentifier.Places.list)
         case .noPlaces:
             ContentUnavailableView(
                 Constants.Places.Strings.noLocationsTitle,
@@ -84,10 +82,10 @@ struct PlacesView: View {
                     Task { await viewModel.handleEvent(.retryTapped) }
                 }
                 .buttonStyle(.secondary)
+                .accessibilityElement(children: .ignore)
                 .accessibilityIdentifier(AccessibilityIdentifier.Common.errorRetry)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .accessibilityIdentifier(AccessibilityIdentifier.Places.error)
         }
     }
 

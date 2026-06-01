@@ -22,7 +22,6 @@ struct ManualPlaceView: View {
                         .foregroundStyle(DesignSystem.Colors.secondaryText)
                         .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
-                        .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.disclaimer)
 
                     ValidatedNumericTextField(
                         label: Constants.ManualPlace.Strings.latitudeLabel,
@@ -40,12 +39,15 @@ struct ManualPlaceView: View {
                         accessibilityIdentifier: AccessibilityIdentifier.ManualPlace.longitudeField
                     )
 
-                    Button(Constants.ManualPlace.Strings.openWikipedia) {
+                    Button {
                         viewModel.handleEvent(.openButtonTapped)
+                    } label: {
+                        Text(Constants.ManualPlace.Strings.openWikipedia)
                     }
-                    .buttonStyle(.primary)
                     .disabled(!viewModel.valid)
+                    .buttonStyle(.primary)
                     .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.openWikipediaButton)
+                    .accessibilityRespondsToUserInteraction(viewModel.valid)
                 }
                 .padding(DesignSystem.Spacing.medium)
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
@@ -63,7 +65,6 @@ struct ManualPlaceView: View {
             .background(DesignSystem.Colors.screenBackground)
             .navigationTitle(Constants.ManualPlace.Strings.title)
             .navigationBarTitleDisplayMode(.inline)
-            .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.root)
         }
     }
 }
