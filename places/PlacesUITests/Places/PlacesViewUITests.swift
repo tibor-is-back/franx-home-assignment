@@ -12,7 +12,7 @@ final class PlacesViewUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchForUITesting(placesFetch: .loaded, deepLinkFails: true)
 
-        app.waitForPlacesToLoad()
+        app.waitForExistence(ofIdentifier: UITestAccessibility.Places.sanFranciscoListItem)
 
         // When
         app.tapElement(withIdentifier: UITestAccessibility.Places.sanFranciscoListItem)
@@ -44,7 +44,7 @@ final class PlacesViewUITests: XCTestCase {
         app.tapElement(withIdentifier: UITestAccessibility.Common.errorRetry)
 
         // Then
-        app.waitForPlacesToLoad()
+        app.waitForExistence(ofIdentifier: UITestAccessibility.Places.sanFranciscoListItem)
     }
 
     @MainActor
@@ -53,7 +53,7 @@ final class PlacesViewUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchForUITesting(placesFetch: .loaded, deepLinkFails: true)
 
-        app.waitForPlacesToLoad()
+        app.waitForExistence(ofIdentifier: UITestAccessibility.Places.sanFranciscoListItem)
         app.tapElement(withIdentifier: UITestAccessibility.Places.sanFranciscoListItem)
 
         let toast = app.element(withIdentifier: UITestAccessibility.Common.toast)

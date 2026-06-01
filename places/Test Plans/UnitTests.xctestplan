@@ -1,0 +1,30 @@
+{
+  "configurations" : [
+    {
+      "id" : "A1B2C3D4-E5F6-4789-A012-3456789ABCDE",
+      "name" : "Debug",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : true,
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Places.xcodeproj",
+      "identifier" : "75DC4DF82FCB480E00C4FF84",
+      "name" : "Places"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:Places.xcodeproj",
+        "identifier" : "75DC4E052FCB480F00C4FF84",
+        "name" : "PlacesTests"
+      }
+    }
+  ],
+  "version" : 1
+}

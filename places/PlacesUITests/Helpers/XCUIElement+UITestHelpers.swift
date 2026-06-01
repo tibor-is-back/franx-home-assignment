@@ -37,19 +37,6 @@ extension XCUIApplication {
         element.tap()
     }
 
-    func waitForPlacesToLoad(
-        timeout: TimeInterval = 5,
-        file: StaticString = #filePath,
-        line: UInt = #line
-    ) {
-        waitForExistence(
-            ofIdentifier: UITestAccessibility.Places.sanFranciscoListItem,
-            timeout: timeout,
-            file: file,
-            line: line
-        )
-    }
-
     func waitForExistence(
         ofIdentifier identifier: String,
         timeout: TimeInterval = 5,
