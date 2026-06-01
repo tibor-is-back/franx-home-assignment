@@ -2,10 +2,11 @@
 
 iOS home assignment: a **Places** companion app and a modified **Wikipedia** app.
 
-## Folders
+## Repository structure
 
 - **`places/`** — Companion app that opens Wikipedia at a chosen location via deep link.
 - **`wikipedia-ios/`** — [Wikipedia iOS](https://github.com/wikimedia/wikipedia-ios) fork. 
+- **`images/`** — Feature showcase GIFs. 
 
 ## Places app
 
