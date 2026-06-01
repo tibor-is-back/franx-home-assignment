@@ -75,18 +75,21 @@ struct PlacesView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .accessibilityIdentifier(AccessibilityIdentifier.Places.empty)
         case .error(let title, let subtitle):
-            ErrorView(
-                title: title,
-                subtitle: subtitle,
-                retryTitle: Constants.Places.Strings.retry
-            ) {
-                Task {
-                    await viewModel.handleEvent(.retryTapped)
+            VStack(spacing: DesignSystem.Spacing.medium) {
+                ContentUnavailableView(
+                    title,
+                    systemImage: "exclamationmark.triangle",
+                    description: Text(subtitle)
+                )
+                .accessibilityIdentifier(AccessibilityIdentifier.Places.error)
+
+                Button(Constants.Places.Strings.retry) {
+                    Task { await viewModel.handleEvent(.retryTapped) }
                 }
+                .buttonStyle(.secondary)
+                .accessibilityIdentifier(AccessibilityIdentifier.Common.errorRetry)
             }
-            .padding(DesignSystem.Spacing.medium)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .accessibilityIdentifier(AccessibilityIdentifier.Places.error)
         }
     }
 
@@ -127,4 +130,3 @@ struct PlacesView: View {
     )
     .preferredColorScheme(.dark)
 }
-
