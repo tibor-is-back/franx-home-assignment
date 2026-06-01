@@ -1,6 +1,6 @@
 import Foundation
 
-nonisolated enum UITestFixtures {
+ enum UITestFixtures {
     static let sampleLocations: [LocationDTO] = [
         LocationDTO(name: "San Francisco", lat: 37.7749, long: -122.4194),
         LocationDTO(name: "São Paulo", lat: -23.5505, long: -46.6333),

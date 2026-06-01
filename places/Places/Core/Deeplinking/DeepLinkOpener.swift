@@ -1,13 +1,15 @@
 import UIKit
 
-enum DeepLinkOpenerError: Error {
+enum DeepLinkOpenerError: Error, Sendable {
     case unableToOpenDestination
 }
 
-protocol DeepLinkOpener {
+@MainActor
+protocol DeepLinkOpener: Sendable {
     func openLocation(latitude: Double, longitude: Double) throws(DeepLinkOpenerError)
 }
 
+@MainActor
 final class DefaultDeepLinkOpener: DeepLinkOpener {
 
     func openLocation(latitude: Double, longitude: Double) throws(DeepLinkOpenerError) {

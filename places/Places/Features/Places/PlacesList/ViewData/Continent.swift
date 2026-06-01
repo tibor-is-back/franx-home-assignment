@@ -1,6 +1,6 @@
 import SwiftUI
 
-nonisolated enum Continent: CaseIterable {
+ enum Continent: CaseIterable {
     case europe
     case asia
     case africa

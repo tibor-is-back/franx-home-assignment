@@ -1,6 +1,6 @@
 import Foundation
 
-nonisolated final class FailThenSucceedLocationsService: LocationsService, @unchecked Sendable {
+ final class FailThenSucceedLocationsService: LocationsService, @unchecked Sendable {
     private var fetchCount = 0
     private let error: LocationsServiceError
     private let locations: [LocationDTO]
@@ -13,7 +13,7 @@ nonisolated final class FailThenSucceedLocationsService: LocationsService, @unch
         self.locations = locations
     }
 
-    @concurrent
+
     func fetchLocations() async throws(LocationsServiceError) -> [LocationDTO] {
         fetchCount += 1
         if fetchCount == 1 {

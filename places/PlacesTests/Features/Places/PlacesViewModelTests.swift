@@ -245,12 +245,11 @@ private struct SUT {
     let deepLinkOpener: MockDeepLinkOpener
 }
 
-private nonisolated final class MockLocationsService: LocationsService, @unchecked Sendable {
+private  final class MockLocationsService: LocationsService, @unchecked Sendable {
     var locations: [LocationDTO] = []
     var error: LocationsServiceError?
     private(set) var fetchCount = 0
 
-    @concurrent
     func fetchLocations() async throws(LocationsServiceError) -> [LocationDTO] {
         fetchCount += 1
         if let error {

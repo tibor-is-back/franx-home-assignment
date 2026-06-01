@@ -1,6 +1,6 @@
 import Foundation
 
-nonisolated struct StubLocationsService: LocationsService, Sendable {
+struct StubLocationsService: LocationsService {
     enum Behavior {
         case loading
         case success([LocationDTO])
@@ -9,7 +9,7 @@ nonisolated struct StubLocationsService: LocationsService, Sendable {
 
     let behavior: Behavior
 
-    @concurrent
+
     func fetchLocations() async throws(LocationsServiceError) -> [LocationDTO] {
         switch behavior {
         case .loading:

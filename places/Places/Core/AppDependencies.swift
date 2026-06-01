@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 enum AppDependencies {
     static func makeLocationsService() -> LocationsService {
         if let configuration = UITestLaunchConfiguration.current {

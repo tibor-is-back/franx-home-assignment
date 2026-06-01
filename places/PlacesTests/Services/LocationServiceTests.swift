@@ -125,7 +125,7 @@ struct LocationServiceTests {
     }
 }
 
-private struct MockNetworkClient: NetworkClient, Sendable {
+private struct MockNetworkClient: NetworkClient {
     let response: LocationResponse?
     let error: NetworkError?
 
@@ -133,8 +133,7 @@ private struct MockNetworkClient: NetworkClient, Sendable {
         self.response = response
         self.error = error
     }
-
-    @concurrent
+    
     func fetch<T: Decodable & Sendable>(_ request: URLRequest) async throws(NetworkError) -> T {
         if let error {
             throw error

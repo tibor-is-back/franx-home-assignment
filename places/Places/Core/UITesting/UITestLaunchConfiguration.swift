@@ -1,5 +1,6 @@
 import Foundation
 
+@MainActor
 struct UITestLaunchConfiguration {
     enum PlacesFetchMode {
         case loaded

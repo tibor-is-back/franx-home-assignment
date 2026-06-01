@@ -1,9 +1,9 @@
 import Foundation
 
-nonisolated enum LocationEndpoint: Endpoint {
+ enum LocationEndpoint: Endpoint {
     case locations
 
-    nonisolated var urlRequest: URLRequest {
+     var urlRequest: URLRequest {
         switch self {
         case .locations:
             URLRequest(
