@@ -7,6 +7,80 @@ iOS home assignment: a **Places** companion app and a modified **Wikipedia** app
 - **`places/`** — Companion app that opens Wikipedia at a chosen location via deep link.
 - **`wikipedia-ios/`** — [Wikipedia iOS](https://github.com/wikimedia/wikipedia-ios) fork. 
 
+## Places app
+
+### App features
+
+* Dowloads list of Locations according to the assignment, handles edges cases such errors or empty list
+* Manually provide coordinates through a separate screen
+* Opens the Wikipedia app if available, shows error if Wikipedia app not available
+
+GIFS
+
+### Implementation details
+
+#### Features
+
+* Written in Swift 6.0 with default project settings of Xcode 26.4
+* Uses MVVM + Layered architecture (Presentation, Domain, Data)
+* Dependency injection throughout the application
+* Async/await-based implementation
+* Comprehensive error handling and retry support
+* Unit tests for business logic and data layers
+* UI tests covering all user flows
+* Accessibility audit tests for all flows
+* Separate design system implementation for reusable UI components
+
+#### Developer Remarks
+
+* No unit tests were added for the service layer, as mocking `URLProtocol` and `UIApplication` would add significant overhead for a small assignment
+* No use case layer was introduced because it would not contain any business logic
+* View data mapping in `PlacesViewModel` is performed after the `await` call. The operation is O(n) on a small dataset, but could be moved to a nonisolated context if the processing became more expensive
+
+#### Project folder structure
+
+```
+places/
+├── Places.xcodeproj
+├── Supporting/                 # Info.plist
+├── Test Plans/
+│   ├── UnitTests.xctestplan
+│   ├── UITests.xctestplan
+│   └── AccessibilityTests.xctestplan
+├── Places/
+│   ├── PlacesApp.swift
+│   ├── Core/                   # DI, constants, networking, deep links, UI-test stubs
+│   ├── Features/Places/
+│   │   ├── PlacesList/         # View, ViewModel, ViewData, PreviewData
+│   │   ├── ManualPlace/        # View, ViewModel, PreviewData
+│   │   └── Services/LocationService/
+│   ├── UI/                     # DesignSystem, CommonElements, PreviewData helpers
+│   └── Resources/              # Assets, launch screen
+├── PlacesTests/
+│   ├── Features/Places/
+│   └── Services/
+└── PlacesUITests/
+    ├── Places/
+    ├── Accessibility/
+    └── Helpers/
+```
+
+#### Targets
+
+| Target | Role |
+|--------|------|
+| **Places** | SwiftUI app: locations list, manual coordinates, Wikipedia deep links |
+| **PlacesTests** | Unit tests (view models, continent logic, location service) |
+| **PlacesUITests** | UI tests and accessibility audits (via test plans) |
+
+#### Testing
+
+| Test plan | Role |
+|-----------|------|
+| **UnitTests** | View models, services, and helpers |
+| **UITests** | PlacesView states and ManualPlaceView flows |
+| **AccessibilityTests** | Accessibility audit on all screens |
+
 ## Wikipedia app
 
 ### New Features
@@ -44,3 +118,11 @@ xcrun simctl openurl booted "wikipedia://places?latitude=51.5074&longitude=-0.12
 # Amsterdam
 xcrun simctl openurl booted "wikipedia://places?latitude=52.3676&longitude=4.9041"
 ```
+
+## Usage of AI
+
+AI-assisted tools (Cursor and Codex) were used for the following tasks:
+* Generating SwiftUI preview data
+* Help with writing unit and UI tests
+* Assisting with general refactoring
+* Generating simple code snippets for trivial parts
