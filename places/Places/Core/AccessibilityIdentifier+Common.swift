@@ -1,5 +1,3 @@
-// swiftlint:disable nesting
-
 extension AccessibilityIdentifier {
     enum Common {
         static let loading = "common_loading"

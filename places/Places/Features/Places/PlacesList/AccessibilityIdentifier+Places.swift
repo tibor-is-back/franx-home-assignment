@@ -1,5 +1,3 @@
-// swiftlint:disable nesting
-
 extension AccessibilityIdentifier {
     enum Places {
         static let root = "places_root"
