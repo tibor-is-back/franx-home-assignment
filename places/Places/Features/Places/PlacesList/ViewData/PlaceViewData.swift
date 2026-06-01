@@ -1,7 +1,7 @@
 struct PlaceViewData: Equatable {
     let locationName: String
-    let latitude: String
-    let longitude: String
+    let latitude: Double
+    let longitude: Double
     let continent: Continent
 
     var id: String { "\(locationName)-\(latitude)-\(longitude)" }

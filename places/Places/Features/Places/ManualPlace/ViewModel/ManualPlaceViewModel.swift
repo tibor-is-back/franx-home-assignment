@@ -48,6 +48,11 @@ final class ManualPlaveViewModel {
     }
 
     private func handleAppOpen() {
+        guard let latitude = parsedCoordinate(latitude),
+              let longitude = parsedCoordinate(longitude) else {
+            return
+        }
+
         do {
             try deepLinkOpener.openLocation(latitude: latitude, longitude: longitude)
         } catch {

@@ -5,5 +5,5 @@ extension PreviewData {
 }
 
 private struct MockDeepLinkOpener: DeepLinkOpener {
-    func openLocation(latitude: String, longitude: String) throws(DeepLinkOpenerError) {}
+    func openLocation(latitude: Double, longitude: Double) throws(DeepLinkOpenerError) {}
 }

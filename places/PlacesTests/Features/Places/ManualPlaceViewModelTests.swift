@@ -98,8 +98,8 @@ struct ManualPlaceViewModelTests {
 
         sut.viewModel.handleEvent(.openButtonTapped)
 
-        #expect(sut.deepLinkOpener.lastLatitude == "52.37")
-        #expect(sut.deepLinkOpener.lastLongitude == "4.89")
+        #expect(sut.deepLinkOpener.lastLatitude == 52.37)
+        #expect(sut.deepLinkOpener.lastLongitude == 4.89)
         #expect(sut.viewModel.toastMessage == nil)
     }
 
@@ -144,10 +144,10 @@ private struct SUT {
 @MainActor
 private final class MockDeepLinkOpener: DeepLinkOpener {
     var shouldThrow = false
-    private(set) var lastLatitude: String?
-    private(set) var lastLongitude: String?
+    private(set) var lastLatitude: Double?
+    private(set) var lastLongitude: Double?
 
-    func openLocation(latitude: String, longitude: String) throws(DeepLinkOpenerError) {
+    func openLocation(latitude: Double, longitude: Double) throws(DeepLinkOpenerError) {
         lastLatitude = latitude
         lastLongitude = longitude
         if shouldThrow {

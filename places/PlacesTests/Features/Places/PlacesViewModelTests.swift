@@ -34,8 +34,8 @@ struct PlacesViewModelTests {
         #expect(places == [
             PlaceViewData(
                 locationName: "Amsterdam",
-                latitude: "52.3676",
-                longitude: "4.9041",
+                latitude: 52.3676,
+                longitude: 4.9041,
                 continent: .europe
             )
         ])
@@ -61,8 +61,8 @@ struct PlacesViewModelTests {
         #expect(places == [
             PlaceViewData(
                 locationName: Constants.Places.Strings.unknownLocation,
-                latitude: "40.4381",
-                longitude: "-3.7481",
+                latitude: 40.4381,
+                longitude: -3.7481,
                 continent: .europe
             )
         ])
@@ -171,8 +171,8 @@ struct PlacesViewModelTests {
         await sut.viewModel.handleEvent(.placeTapped(places[0]))
 
         // Then
-        #expect(sut.deepLinkOpener.lastLatitude == "55.6713")
-        #expect(sut.deepLinkOpener.lastLongitude == "12.5238")
+        #expect(sut.deepLinkOpener.lastLatitude == 55.6713)
+        #expect(sut.deepLinkOpener.lastLongitude == 12.5238)
         #expect(sut.viewModel.state.overlay == .none)
     }
 
@@ -263,10 +263,10 @@ private final class MockLocationsService: LocationsService {
 @MainActor
 private final class MockDeepLinkOpener: DeepLinkOpener {
     var shouldThrow = false
-    private(set) var lastLatitude: String?
-    private(set) var lastLongitude: String?
+    private(set) var lastLatitude: Double?
+    private(set) var lastLongitude: Double?
 
-    func openLocation(latitude: String, longitude: String) throws(DeepLinkOpenerError) {
+    func openLocation(latitude: Double, longitude: Double) throws(DeepLinkOpenerError) {
         lastLatitude = latitude
         lastLongitude = longitude
         if shouldThrow {

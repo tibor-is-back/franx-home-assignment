@@ -56,10 +56,12 @@ class PlacesViewModel {
 
     private func processPlaces(_ places: [LocationDTO]) -> [PlaceViewData] {
         places.map {
-            PlaceViewData(locationName: $0.name ?? Constants.Places.Strings.unknownLocation,
-                          latitude: "\($0.lat)",
-                          longitude: "\($0.long)",
-                          continent: Continent.from(latitude: $0.lat, longitude: $0.long))
+            PlaceViewData(
+                locationName: $0.name ?? Constants.Places.Strings.unknownLocation,
+                latitude: $0.lat,
+                longitude: $0.long,
+                continent: Continent.from(latitude: $0.lat, longitude: $0.long)
+            )
         }
     }
 

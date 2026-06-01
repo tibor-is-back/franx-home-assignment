@@ -6,32 +6,32 @@ extension PreviewData {
         static let places: [PlaceViewData] = [
             PlaceViewData(
                 locationName: "San Francisco",
-                latitude: "37.7749",
-                longitude: "-122.4194",
+                latitude: 37.7749,
+                longitude: -122.4194,
                 continent: .northAmerica
             ),
             PlaceViewData(
                 locationName: "São Paulo",
-                latitude: "-23.5505",
-                longitude: "-46.6333",
+                latitude: -23.5505,
+                longitude: -46.6333,
                 continent: .southAmerica
             ),
             PlaceViewData(
                 locationName: "London Eye",
-                latitude: "51.5033",
-                longitude: "-0.1195",
+                latitude: 51.5033,
+                longitude: -0.1195,
                 continent: .europe
             ),
             PlaceViewData(
                 locationName: "Lagos",
-                latitude: "6.5244",
-                longitude: "3.3792",
+                latitude: 6.5244,
+                longitude: 3.3792,
                 continent: .africa
             ),
             PlaceViewData(
                 locationName: "Tokyo Tower",
-                latitude: "35.6586",
-                longitude: "139.7454",
+                latitude: 35.6586,
+                longitude: 139.7454,
                 continent: .asia
             )
         ]
@@ -80,5 +80,5 @@ private struct PreviewLocationsService: LocationsService {
 }
 
 private struct MockDeepLinkOpener: DeepLinkOpener {
-    func openLocation(latitude: String, longitude: String) throws(DeepLinkOpenerError) {}
+    func openLocation(latitude: Double, longitude: Double) throws(DeepLinkOpenerError) {}
 }
