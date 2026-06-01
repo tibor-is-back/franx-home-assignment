@@ -40,7 +40,7 @@ enum DesignSystem {
     enum Size {
         static let icon: CGFloat = 24
         static let iconContainer: CGFloat = 40
-        static let largeIconContainer: CGFloat = 80
+        static let largeIconContainer: CGFloat = 128
 
         static let image: CGFloat = 64
 

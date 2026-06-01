@@ -2,7 +2,7 @@ extension Constants {
     enum ManualPlace {
         enum Strings {
             static let title = "Manual place"
-            static let disclaimer = "Provide manual coordinates below"
+            static let disclaimer = "Provide coordinates manually below"
             static let latitudeLabel = "Latitude"
             static let longitudeLabel = "Longitude"
             static let latitudePlaceholder = "eg. 40.7128"

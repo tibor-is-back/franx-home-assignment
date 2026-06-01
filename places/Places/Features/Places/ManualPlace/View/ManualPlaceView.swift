@@ -10,67 +10,69 @@ struct ManualPlaceView: View {
 
     var body: some View {
         NavigationStack {
-            ZStack(alignment: .bottom) {
-                ScrollView {
-                    VStack(spacing: DesignSystem.Spacing.large) {
-                        PlaceIconView(
-                            continent: viewModel.continent,
-                            containerSize: DesignSystem.Size.largeIconContainer
-                        )
+            ZStack(alignment: .top) {
+                VStack(spacing: DesignSystem.Spacing.large) {
+                    PlaceIconView(
+                        continent: viewModel.continent,
+                        containerSize: DesignSystem.Size.largeIconContainer
+                    )
+
+                    Text(Constants.ManualPlace.Strings.disclaimer)
+                        .font(DesignSystem.Fonts.subheadline)
+                        .foregroundStyle(DesignSystem.Colors.secondaryText)
+                        .multilineTextAlignment(.center)
                         .frame(maxWidth: .infinity)
+                        .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.disclaimer)
 
-                        Text(Constants.ManualPlace.Strings.disclaimer)
-                            .font(DesignSystem.Fonts.subheadline)
-                            .foregroundStyle(DesignSystem.Colors.secondaryText)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity)
-                            .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.disclaimer)
+                    ValidatedNumericTextField(
+                        label: Constants.ManualPlace.Strings.latitudeLabel,
+                        placeholder: Constants.ManualPlace.Strings.latitudePlaceholder,
+                        text: $viewModel.latitude,
+                        range: Constants.ManualPlace.CoordinateRange.latitude,
+                        accessibilityIdentifier: AccessibilityIdentifier.ManualPlace.latitudeField
+                    )
 
-                        VStack(alignment: .leading, spacing: DesignSystem.Spacing.medium) {
-                            ValidatedNumericTextField(
-                                label: Constants.ManualPlace.Strings.latitudeLabel,
-                                placeholder: Constants.ManualPlace.Strings.latitudePlaceholder,
-                                text: $viewModel.latitude,
-                                range: Constants.ManualPlace.CoordinateRange.latitude,
-                                accessibilityIdentifier: AccessibilityIdentifier.ManualPlace.latitudeField
-                            )
+                    ValidatedNumericTextField(
+                        label: Constants.ManualPlace.Strings.longitudeLabel,
+                        placeholder: Constants.ManualPlace.Strings.longitudePlaceholder,
+                        text: $viewModel.longitude,
+                        range: Constants.ManualPlace.CoordinateRange.longitude,
+                        accessibilityIdentifier: AccessibilityIdentifier.ManualPlace.longitudeField
+                    )
 
-                            ValidatedNumericTextField(
-                                label: Constants.ManualPlace.Strings.longitudeLabel,
-                                placeholder: Constants.ManualPlace.Strings.longitudePlaceholder,
-                                text: $viewModel.longitude,
-                                range: Constants.ManualPlace.CoordinateRange.longitude,
-                                accessibilityIdentifier: AccessibilityIdentifier.ManualPlace.longitudeField
-                            )
-                        }
-
-                        Button(Constants.ManualPlace.Strings.openWikipedia) {
-                            viewModel.handleEvent(.openButtonTapped)
-                        }
-                        .buttonStyle(.primary)
-                        .disabled(!viewModel.valid)
-                        .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.openWikipediaButton)
+                    Button(Constants.ManualPlace.Strings.openWikipedia) {
+                        viewModel.handleEvent(.openButtonTapped)
                     }
-                    .padding(DesignSystem.Spacing.medium)
+                    .buttonStyle(.primary)
+                    .disabled(!viewModel.valid)
+                    .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.openWikipediaButton)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(DesignSystem.Colors.screenBackground)
+                .padding(DesignSystem.Spacing.medium)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
 
                 if let message = viewModel.toastMessage {
                     ToastView(
                         message: message,
                         onDismiss: { viewModel.handleEvent(.toastDismissed) }
                     )
+                    .padding(.horizontal, DesignSystem.Spacing.medium)
+                    .padding(.top, DesignSystem.Spacing.medium)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(DesignSystem.Colors.screenBackground)
             .navigationTitle(Constants.ManualPlace.Strings.title)
             .navigationBarTitleDisplayMode(.inline)
             .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.root)
         }
     }
-
 }
 
 #Preview {
     ManualPlaceView(deepLinkOpener: PreviewData.ManualPlace.deepLinkOpener)
+}
+
+#Preview("Dark") {
+    ManualPlaceView(deepLinkOpener: PreviewData.ManualPlace.deepLinkOpener)
+        .preferredColorScheme(.dark)
 }

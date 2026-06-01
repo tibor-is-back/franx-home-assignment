@@ -31,6 +31,7 @@ struct ToastView: View {
             .accessibilityLabel("Dismiss")
             .accessibilityIdentifier(AccessibilityIdentifier.Common.toastDismiss)
         }
+        .frame(maxWidth: .infinity)
         .padding(DesignSystem.Spacing.medium)
         .accessibilityIdentifier(AccessibilityIdentifier.Common.toast)
         .background(DesignSystem.Colors.error.opacity(DesignSystem.Opacity.iconBackground))
@@ -39,8 +40,6 @@ struct ToastView: View {
             RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium)
                 .strokeBorder(DesignSystem.Colors.error, lineWidth: 1)
         }
-        .padding(.horizontal, DesignSystem.Spacing.medium)
-        .padding(.bottom, DesignSystem.Spacing.medium)
         .opacity(opacity)
         .onAppear {
             withAnimation(DesignSystem.Toast.fadeAnimation) {
@@ -65,6 +64,8 @@ struct ToastView: View {
 
 #Preview {
     ToastView(message: "Wikipedia app not installed") {}
+        .padding(.horizontal, DesignSystem.Spacing.medium)
+        .padding(.bottom, DesignSystem.Spacing.medium)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
         .background(DesignSystem.Colors.screenBackground)
 }

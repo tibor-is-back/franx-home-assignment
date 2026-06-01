@@ -27,6 +27,8 @@ struct PlacesView: View {
                     ToastView(message: message) {
                         Task { await viewModel.handleEvent(.dismissToast) }
                     }
+                    .padding(.horizontal, DesignSystem.Spacing.medium)
+                    .padding(.bottom, DesignSystem.Spacing.medium)
                 }
             }
             .navigationTitle(Constants.Places.Strings.title)
@@ -117,3 +119,12 @@ struct PlacesView: View {
         deepLinkOpener: PreviewData.Places.deepLinkOpener
     )
 }
+
+#Preview("Dark") {
+    PlacesView(
+        locationService: PreviewData.Places.loadedLocationService,
+        deepLinkOpener: PreviewData.Places.deepLinkOpener
+    )
+    .preferredColorScheme(.dark)
+}
+
