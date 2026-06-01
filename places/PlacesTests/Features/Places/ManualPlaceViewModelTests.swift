@@ -57,6 +57,31 @@ struct ManualPlaceViewModelTests {
     }
 
     @Test
+    func givenEmptyCoordinates_whenContinentChecked_thenReturnsAllContinents() {
+        let sut = makeSUT()
+
+        #expect(sut.viewModel.continent == .allContinents)
+    }
+
+    @Test
+    func givenEuropeanCoordinates_whenContinentChecked_thenReturnsEurope() {
+        let sut = makeSUT()
+        sut.viewModel.latitude = "52.37"
+        sut.viewModel.longitude = "4.89"
+
+        #expect(sut.viewModel.continent == .europe)
+    }
+
+    @Test
+    func givenOpenOceanCoordinates_whenContinentChecked_thenReturnsAllContinents() {
+        let sut = makeSUT()
+        sut.viewModel.latitude = "0"
+        sut.viewModel.longitude = "-160"
+
+        #expect(sut.viewModel.continent == .allContinents)
+    }
+
+    @Test
     func givenWhitespaceAroundCoordinates_whenValidChecked_thenReturnsTrue() {
         let sut = makeSUT()
         sut.viewModel.latitude = "  52.37  "

@@ -20,6 +20,7 @@ enum DesignSystem {
         static let locationRed = Color.red
         static let locationOrange = Color.orange
         static let locationTeal = Color.teal
+        static let locationGray = Color.gray
     }
 
     enum Spacing {
@@ -39,6 +40,7 @@ enum DesignSystem {
     enum Size {
         static let icon: CGFloat = 24
         static let iconContainer: CGFloat = 40
+        static let largeIconContainer: CGFloat = 80
 
         static let image: CGFloat = 64
 

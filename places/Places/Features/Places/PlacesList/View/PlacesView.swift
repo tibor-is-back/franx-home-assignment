@@ -24,7 +24,9 @@ struct PlacesView: View {
                     .background(DesignSystem.Colors.screenBackground)
 
                 if case .toast(let message) = viewModel.state.overlay {
-                    ToastView(message: message, onDismiss: { viewModel.dismissToast() })
+                    ToastView(message: message) {
+                        Task { await viewModel.handleEvent(.dismissToast) }
+                    }
                 }
             }
             .navigationTitle(Constants.Places.Strings.title)

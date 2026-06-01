@@ -6,6 +6,7 @@ nonisolated enum Continent: CaseIterable {
     case africa
     case northAmerica
     case southAmerica
+    case allContinents
 
     @MainActor var color: Color {
         switch self {
@@ -14,6 +15,7 @@ nonisolated enum Continent: CaseIterable {
         case .africa: DesignSystem.Colors.locationOrange
         case .northAmerica: DesignSystem.Colors.locationPurple
         case .southAmerica: DesignSystem.Colors.locationTeal
+        case .allContinents: DesignSystem.Colors.locationGray
         }
     }
 
@@ -24,11 +26,11 @@ nonisolated enum Continent: CaseIterable {
         case .africa: "continent-africa"
         case .northAmerica: "continent-north-america"
         case .southAmerica: "continent-south-america"
+        case .allContinents: "all-continents"
         }
     }
 
     static func from(latitude: Double, longitude: Double) -> Continent {
-
         if latitude >= 7, longitude <= -50 {
             return .northAmerica
         }
@@ -45,6 +47,14 @@ nonisolated enum Continent: CaseIterable {
             return .africa
         }
 
-        return .asia
+        if latitude >= -5, latitude <= 55, longitude >= 95 {
+            return .asia
+        }
+
+        if latitude >= 5, latitude <= 45, longitude >= 25, longitude < 95 {
+            return .asia
+        }
+
+        return .allContinents
     }
 }

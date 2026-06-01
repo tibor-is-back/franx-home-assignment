@@ -43,7 +43,7 @@ struct PlacesViewModelTests {
     }
 
     @Test
-    func givenNilLocationName_whenViewAppeared_thenUsesUnknownLocationLabel() async {
+    func givenNilLocationName_whenViewAppeared_thenMapsPlaceToUnknownLocation() async {
         // Given
         let sut = makeSUT()
         sut.locationService.locations = [
@@ -58,8 +58,14 @@ struct PlacesViewModelTests {
             Issue.record("Expected loaded state")
             return
         }
-        #expect(places.count == 1)
-        #expect(places[0].locationName == Constants.Places.Strings.unknownLocation)
+        #expect(places == [
+            PlaceViewData(
+                locationName: Constants.Places.Strings.unknownLocation,
+                latitude: "40.4381",
+                longitude: "-3.7481",
+                continent: .europe
+            )
+        ])
     }
 
     @Test

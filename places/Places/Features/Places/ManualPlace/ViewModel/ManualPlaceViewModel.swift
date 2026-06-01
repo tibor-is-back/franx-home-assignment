@@ -13,6 +13,14 @@ final class ManualPlaveViewModel {
             && isValidCoordinate(longitude, in: Constants.ManualPlace.CoordinateRange.longitude)
     }
 
+    var continent: Continent {
+        guard let latitude = parsedCoordinate(latitude),
+              let longitude = parsedCoordinate(longitude) else {
+            return .allContinents
+        }
+        return Continent.from(latitude: latitude, longitude: longitude)
+    }
+
     private let deepLinkOpener: DeepLinkOpener
 
     init(deeplLinkOpener: DeepLinkOpener) {
@@ -28,12 +36,14 @@ final class ManualPlaveViewModel {
         }
     }
 
-    private func isValidCoordinate(_ text: String, in range: ClosedRange<Double>) -> Bool {
+    private func parsedCoordinate(_ text: String) -> Double? {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty,
-              let value = Double(trimmed) else {
-            return false
-        }
+        guard !trimmed.isEmpty else { return nil }
+        return Double(trimmed)
+    }
+
+    private func isValidCoordinate(_ text: String, in range: ClosedRange<Double>) -> Bool {
+        guard let value = parsedCoordinate(text) else { return false }
         return range.contains(value)
     }
 

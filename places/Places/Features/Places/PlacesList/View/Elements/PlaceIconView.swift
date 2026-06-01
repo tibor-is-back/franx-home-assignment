@@ -2,6 +2,7 @@ import SwiftUI
 
 struct PlaceIconView: View {
     let continent: Continent
+    var containerSize: CGFloat = DesignSystem.Size.iconContainer
 
     var body: some View {
         Image(continent.imageName)
@@ -9,10 +10,7 @@ struct PlaceIconView: View {
             .scaledToFit()
             .foregroundStyle(continent.color)
             .padding(DesignSystem.Spacing.small)
-            .frame(
-                width: DesignSystem.Size.iconContainer,
-                height: DesignSystem.Size.iconContainer
-            )
+            .frame(width: containerSize, height: containerSize)
             .background(continent.color.opacity(DesignSystem.Opacity.iconBackground))
             .clipShape(RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.medium))
             .accessibilityHidden(true)

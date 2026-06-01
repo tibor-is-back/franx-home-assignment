@@ -66,4 +66,17 @@ struct ContinentTests {
         // Then
         #expect(continent == .asia)
     }
+
+    @Test
+    func givenOpenOceanCoordinates_whenFromLatitudeLongitude_thenReturnsAllContinents() {
+        // Given
+        let latitude = 0.0
+        let longitude = -160.0
+
+        // When
+        let continent = Continent.from(latitude: latitude, longitude: longitude)
+
+        // Then
+        #expect(continent == .allContinents)
+    }
 }
