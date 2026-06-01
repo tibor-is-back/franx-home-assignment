@@ -2,9 +2,18 @@ import SwiftUI
 
 struct PlacesView: View {
     @State private var viewModel: PlacesViewModel
+    @State private var isManualPlacePresented = false
 
-    init(viewModel: PlacesViewModel) {
-        _viewModel = State(initialValue: viewModel)
+    private let deepLinkOpener: DeepLinkOpener
+
+    init(locationService: LocationsService, deepLinkOpener: DeepLinkOpener) {
+        _viewModel = State(
+            initialValue: PlacesViewModel(
+                locationService: locationService,
+                deepLinkOpener: deepLinkOpener
+            )
+        )
+        self.deepLinkOpener = deepLinkOpener
     }
 
     var body: some View {
@@ -26,7 +35,18 @@ struct PlacesView: View {
             }
             .navigationTitle("Places")
             .navigationBarTitleDisplayMode(.large)
+            .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(Constants.Places.Strings.manualPlace) {
+                        isManualPlacePresented = true
+                    }
+                    .accessibilityIdentifier(AccessibilityIdentifier.Places.manualPlaceButton)
+                }
+            }
             .accessibilityIdentifier(AccessibilityIdentifier.Places.root)
+        }
+        .sheet(isPresented: $isManualPlacePresented) {
+            ManualPlaceView(deepLinkOpener: deepLinkOpener)
         }
         .task {
             await viewModel.handleEvent(.viewAppeared)
@@ -78,17 +98,29 @@ struct PlacesView: View {
 }
 
 #Preview("Loaded") {
-    PlacesView(viewModel: PreviewData.Places.loadedViewModel)
+    PlacesView(
+        locationService: PreviewData.Places.loadedLocationService,
+        deepLinkOpener: PreviewData.Places.deepLinkOpener
+    )
 }
 
 #Preview("Loading") {
-    PlacesView(viewModel: PreviewData.Places.loadingViewModel)
+    PlacesView(
+        locationService: PreviewData.Places.loadingLocationService,
+        deepLinkOpener: PreviewData.Places.deepLinkOpener
+    )
 }
 
 #Preview("Error") {
-    PlacesView(viewModel: PreviewData.Places.errorViewModel)
+    PlacesView(
+        locationService: PreviewData.Places.errorLocationService,
+        deepLinkOpener: PreviewData.Places.deepLinkOpener
+    )
 }
 
 #Preview("No places") {
-    PlacesView(viewModel: PreviewData.Places.noPlacesViewModel)
+    PlacesView(
+        locationService: PreviewData.Places.noPlacesLocationService,
+        deepLinkOpener: PreviewData.Places.deepLinkOpener
+    )
 }

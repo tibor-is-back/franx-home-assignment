@@ -3,6 +3,8 @@ import Foundation
 extension PreviewData {
 
     enum Places {
+        static let deepLinkOpener: DeepLinkOpener = MockDeepLinkOpener()
+
         static let places: [PlaceViewData] = [
             PlaceViewData(
                 locationName: "San Francisco",
@@ -36,39 +38,44 @@ extension PreviewData {
             )
         ]
 
-        static var loadingViewModel: PlacesViewModel {
-            makeViewModel(state: .loading)
-        }
+        static let loadingLocationService: LocationsService = PreviewLocationsService(behavior: .loading)
+        static let loadedLocationService: LocationsService = PreviewLocationsService(
+            behavior: .success(previewLocations)
+        )
+        static let noPlacesLocationService: LocationsService = PreviewLocationsService(behavior: .success([]))
+        static let errorLocationService: LocationsService = PreviewLocationsService(
+            behavior: .failure(.serverError)
+        )
 
-        static var loadedViewModel: PlacesViewModel {
-            makeViewModel(state: .loaded(places))
-        }
-
-        static var noPlacesViewModel: PlacesViewModel {
-            makeViewModel(state: .noPlaces)
-        }
-
-        static var errorViewModel: PlacesViewModel {
-            makeViewModel(state: .error(title: errorTitle, subtitle: errorSubtitle))
-        }
-
-        private static let errorTitle = "Couldn't load places"
-        private static let errorSubtitle = "Check your connection and try again."
-
-        private static func makeViewModel(state: PlacesContentState) -> PlacesViewModel {
-            let viewModel = PlacesViewModel(
-                locationService: MockLocationsService(),
-                deepLinkOpener: MockDeepLinkOpener()
-            )
-            viewModel.state = PlacesViewState(state)
-            return viewModel
-        }
+        private static let previewLocations: [LocationDTO] = [
+            LocationDTO(name: "San Francisco", lat: 37.7749, long: -122.4194),
+            LocationDTO(name: "São Paulo", lat: -23.5505, long: -46.6333),
+            LocationDTO(name: "London Eye", lat: 51.5033, long: -0.1195),
+            LocationDTO(name: "Lagos", lat: 6.5244, long: 3.3792),
+            LocationDTO(name: "Tokyo Tower", lat: 35.6586, long: 139.7454)
+        ]
     }
 }
 
-private struct MockLocationsService: LocationsService {
+private struct PreviewLocationsService: LocationsService {
+    enum Behavior {
+        case loading
+        case success([LocationDTO])
+        case failure(LocationsServiceError)
+    }
+
+    let behavior: Behavior
+
     func fetchLocations() async throws(LocationsServiceError) -> [LocationDTO] {
-        []
+        switch behavior {
+        case .loading:
+            await withCheckedContinuation { (_: CheckedContinuation<Void, Never>) in }
+            return []
+        case .success(let locations):
+            return locations
+        case .failure(let error):
+            throw error
+        }
     }
 }
 
