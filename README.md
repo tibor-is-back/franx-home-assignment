@@ -15,7 +15,19 @@ iOS home assignment: a **Places** companion app and a modified **Wikipedia** app
 * Lets users enter coordinates manually on a separate screen
 * Opens the Wikipedia app when available; shows an error if the Wikipedia app is not available
 
-GIFs
+#### Feature Showcase
+
+**Places list**
+
+![Places list](https://raw.githubusercontent.com/tibor-is-back/franx-home-assignment/main/images/list.gif)
+
+**Manual coordinates**
+
+![Manual place](https://raw.githubusercontent.com/tibor-is-back/franx-home-assignment/main/images/manual.gif)
+
+**Wikipedia app not installed**
+
+![Wikipedia app not installed](https://raw.githubusercontent.com/tibor-is-back/franx-home-assignment/main/images/nowikiapp.gif)
 
 ### Implementation details
 
