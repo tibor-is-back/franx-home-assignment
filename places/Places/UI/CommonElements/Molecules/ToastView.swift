@@ -18,7 +18,6 @@ struct ToastView: View {
                 .foregroundStyle(DesignSystem.Colors.error)
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .multilineTextAlignment(.leading)
-                .accessibilityIdentifier(AccessibilityIdentifier.Common.toastMessage)
                 .accessibilityLabel(message)
 
             Button(action: dismiss) {
@@ -28,11 +27,13 @@ struct ToastView: View {
                     .frame(width: DesignSystem.Size.icon, height: DesignSystem.Size.icon)
             }
             .buttonStyle(.plain)
+            .accessibilityElement(children: .ignore)
             .accessibilityLabel("Dismiss")
             .accessibilityIdentifier(AccessibilityIdentifier.Common.toastDismiss)
         }
         .frame(maxWidth: .infinity)
         .padding(DesignSystem.Spacing.medium)
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier(AccessibilityIdentifier.Common.toast)
         .background(DesignSystem.Colors.error.opacity(DesignSystem.Opacity.iconBackground))
         .background { background }

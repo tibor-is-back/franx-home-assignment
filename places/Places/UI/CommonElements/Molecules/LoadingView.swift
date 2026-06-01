@@ -17,7 +17,6 @@ struct LoadingView: View {
                 .foregroundStyle(DesignSystem.Colors.primaryText)
                 .accessibilityLabel(title)
         }
-        .accessibilityIdentifier(AccessibilityIdentifier.Common.loading)
     }
 }
 

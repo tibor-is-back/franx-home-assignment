@@ -61,14 +61,13 @@ struct ValidatedNumericTextField: View {
                     RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.small)
                         .strokeBorder(borderColor, lineWidth: 1)
                 }
-                .accessibilityIdentifier(accessibilityIdentifier)
                 .accessibilityLabel(label)
+                .accessibilityIdentifier(accessibilityIdentifier)
 
             if let validationError {
                 Text(validationError)
                     .font(DesignSystem.Fonts.caption)
                     .foregroundStyle(DesignSystem.Colors.error)
-                    .accessibilityIdentifier("\(accessibilityIdentifier)_error")
                     .accessibilityLabel(validationError)
             }
         }
