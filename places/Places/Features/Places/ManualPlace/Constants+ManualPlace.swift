@@ -8,6 +8,7 @@ extension Constants {
             static let latitudePlaceholder = "eg. 40.7128"
             static let longitudePlaceholder = "eg. 74.0.06"
             static let openWikipedia = "Open Wikipedia"
+            static let appNotInstalled = "Wikipedia app not installed"
         }
 
         enum CoordinateRange {

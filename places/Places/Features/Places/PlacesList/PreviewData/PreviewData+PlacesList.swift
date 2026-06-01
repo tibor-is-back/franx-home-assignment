@@ -3,8 +3,6 @@ import Foundation
 extension PreviewData {
 
     enum Places {
-        static let deepLinkOpener: DeepLinkOpener = MockDeepLinkOpener()
-
         static let places: [PlaceViewData] = [
             PlaceViewData(
                 locationName: "San Francisco",
@@ -37,6 +35,8 @@ extension PreviewData {
                 continent: .asia
             )
         ]
+
+        static let deepLinkOpener: DeepLinkOpener = MockDeepLinkOpener()
 
         static let loadingLocationService: LocationsService = PreviewLocationsService(behavior: .loading)
         static let loadedLocationService: LocationsService = PreviewLocationsService(

@@ -33,7 +33,7 @@ struct PlacesView: View {
                     }
                 }
             }
-            .navigationTitle("Places")
+            .navigationTitle(Constants.Places.Strings.title)
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {

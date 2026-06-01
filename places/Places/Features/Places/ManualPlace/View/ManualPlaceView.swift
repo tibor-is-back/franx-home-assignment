@@ -10,8 +10,9 @@ struct ManualPlaceView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: DesignSystem.Spacing.large) {
+            ZStack(alignment: .bottom) {
+                ScrollView {
+                    VStack(spacing: DesignSystem.Spacing.large) {
                     Image(systemName: "globe.europe.africa")
                         .resizable()
                         .scaledToFit()
@@ -45,18 +46,36 @@ struct ManualPlaceView: View {
                         )
                     }
 
-                    Button(Constants.ManualPlace.Strings.openWikipedia) { }
+                    Button(Constants.ManualPlace.Strings.openWikipedia) {
+                        viewModel.handleEvent(.openButtonTapped)
+                    }
                         .buttonStyle(.primary)
                         .disabled(!viewModel.valid)
                         .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.openWikipediaButton)
+                    }
+                    .padding(DesignSystem.Spacing.medium)
                 }
-                .padding(DesignSystem.Spacing.medium)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(DesignSystem.Colors.screenBackground)
+
+                if let message = viewModel.toastMessage {
+                    ToastView(message: message) {
+                        dismissToast()
+                    }
+                    .task(id: message) {
+                        try? await Task.sleep(for: DesignSystem.Toast.dismissDelay)
+                        dismissToast()
+                    }
+                }
             }
-            .background(DesignSystem.Colors.screenBackground)
             .navigationTitle(Constants.ManualPlace.Strings.title)
             .navigationBarTitleDisplayMode(.inline)
             .accessibilityIdentifier(AccessibilityIdentifier.ManualPlace.root)
         }
+    }
+
+    private func dismissToast() {
+        viewModel.handleEvent(.toastDismissed)
     }
 }
 

@@ -6,6 +6,8 @@ final class ManualPlaveViewModel {
     var latitude: String = ""
     var longitude: String = ""
 
+    var toastMessage: String?
+
     var valid: Bool {
         isValidCoordinate(latitude, in: Constants.ManualPlace.CoordinateRange.latitude)
             && isValidCoordinate(longitude, in: Constants.ManualPlace.CoordinateRange.longitude)
@@ -18,7 +20,12 @@ final class ManualPlaveViewModel {
     }
 
     func handleEvent(_ event: ManualPlaceViewEvent) {
-        
+        switch event {
+        case .openButtonTapped:
+            handleAppOpen()
+        case .toastDismissed:
+            toastMessage = nil
+        }
     }
 
     private func isValidCoordinate(_ text: String, in range: ClosedRange<Double>) -> Bool {
@@ -28,5 +35,13 @@ final class ManualPlaveViewModel {
             return false
         }
         return range.contains(value)
+    }
+
+    private func handleAppOpen() {
+        do {
+            try deepLinkOpener.openLocation(latitude: latitude, longitude: longitude)
+        } catch {
+            toastMessage = Constants.ManualPlace.Strings.appNotInstalled
+        }
     }
 }

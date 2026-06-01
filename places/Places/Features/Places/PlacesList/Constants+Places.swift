@@ -11,6 +11,7 @@ extension Constants {
             static let generalErrorSubtitle = "Please try again later!"
             static let noInternetErrorTitle = "No internet connection"
             static let noInternetErrorSubtitle = "Check your settings!"
+            static let title = "Places"
         }
     }
 }
