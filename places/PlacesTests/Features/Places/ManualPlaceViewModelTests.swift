@@ -64,6 +64,15 @@ struct ManualPlaceViewModelTests {
     }
 
     @Test
+    func givenNewJerseyCoordinates_whenContinentChecked_thenReturnsNorthAmerica() {
+        let sut = makeSUT()
+        sut.viewModel.latitude = "40.7128"
+        sut.viewModel.longitude = "-74.0060"
+
+        #expect(sut.viewModel.continent == .northAmerica)
+    }
+
+    @Test
     func givenEuropeanCoordinates_whenContinentChecked_thenReturnsEurope() {
         let sut = makeSUT()
         sut.viewModel.latitude = "52.37"

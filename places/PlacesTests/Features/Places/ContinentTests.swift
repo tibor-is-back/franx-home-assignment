@@ -68,6 +68,21 @@ struct ContinentTests {
     }
 
     @Test
+    func givenNewJerseyCoordinates_whenFromLatitudeLongitude_thenReturnsNorthAmerica() {
+        let continent = Continent.from(latitude: 40.7128, longitude: -74.0060)
+
+        #expect(continent == .northAmerica)
+    }
+
+    @Test
+    func givenEasternUSCoordinatesWithPositiveLongitude_whenFromLatitudeLongitude_thenDoesNotReturnAsia() {
+        // Common typo: omitting the minus on western longitudes must not map to Asia.
+        let continent = Continent.from(latitude: 40.7128, longitude: 74.0060)
+
+        #expect(continent != .asia)
+    }
+
+    @Test
     func givenOpenOceanCoordinates_whenFromLatitudeLongitude_thenReturnsAllContinents() {
         // Given
         let latitude = 0.0

@@ -31,23 +31,23 @@ nonisolated enum Continent: CaseIterable {
     }
 
     static func from(latitude: Double, longitude: Double) -> Continent {
-        if latitude >= 7, longitude <= -50 {
-            return .northAmerica
-        }
-
         if latitude >= -35, latitude <= 35, longitude < -82 {
             return .allContinents
         }
 
-        if latitude >= -56, latitude < 15, longitude >= -82, longitude <= -30 {
+        if latitude >= 7, longitude <= -34 {
+            return .northAmerica
+        }
+
+        if latitude >= -56, latitude < 15, longitude >= -82, longitude <= -34 {
             return .southAmerica
         }
 
-        if latitude >= 35, longitude >= -10, longitude <= 40 {
+        if latitude >= 36, longitude >= -25, longitude <= 40 {
             return .europe
         }
 
-        if latitude >= -35, latitude <= 37, longitude >= -20, longitude <= 55 {
+        if latitude >= -35, latitude <= 35, longitude >= -18, longitude <= 52 {
             return .africa
         }
 
@@ -55,7 +55,7 @@ nonisolated enum Continent: CaseIterable {
             return .asia
         }
 
-        if latitude >= 5, latitude <= 45, longitude >= 25, longitude < 95 {
+        if latitude >= -10, latitude <= 25, longitude >= 53, longitude < 95 {
             return .asia
         }
 

@@ -39,6 +39,10 @@ struct ValidatedNumericTextField: View {
     let range: ClosedRange<Double>
     let accessibilityIdentifier: String
 
+    private var allowsNegative: Bool {
+        range.lowerBound < 0
+    }
+
     private var validationError: String? {
         NumericTextValidation.errorMessage(for: text, in: range)
     }
@@ -51,7 +55,7 @@ struct ValidatedNumericTextField: View {
 
             TextField(placeholder, text: $text)
                 .font(DesignSystem.Fonts.body)
-                .keyboardType(.decimalPad)
+                .keyboardType(allowsNegative ? .numbersAndPunctuation : .decimalPad)
                 .padding(DesignSystem.Spacing.small)
                 .background(
                     RoundedRectangle(cornerRadius: DesignSystem.CornerRadius.small)
