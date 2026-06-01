@@ -5,6 +5,7 @@ struct UITestLaunchConfiguration {
         case loaded
         case empty
         case error
+        case errorThenLoaded
         case offline
         case loading
     }
@@ -32,6 +33,8 @@ struct UITestLaunchConfiguration {
             return StubLocationsService(behavior: .success([]))
         case .error:
             return StubLocationsService(behavior: .failure(.serverError))
+        case .errorThenLoaded:
+            return FailThenSucceedLocationsService()
         case .offline:
             return StubLocationsService(behavior: .failure(.offline))
         case .loading:
@@ -46,6 +49,9 @@ struct UITestLaunchConfiguration {
     private static func placesFetchMode(from arguments: [String]) -> PlacesFetchMode {
         if arguments.contains(UITestLaunchArgument.placesFetchEmpty) {
             return .empty
+        }
+        if arguments.contains(UITestLaunchArgument.placesFetchErrorThenLoaded) {
+            return .errorThenLoaded
         }
         if arguments.contains(UITestLaunchArgument.placesFetchError) {
             return .error
