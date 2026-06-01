@@ -11,12 +11,14 @@ protocol DeepLinkOpener {
 final class DefaultDeepLinkOpener: DeepLinkOpener {
 
     func openLocation(latitude: Double, longitude: Double) throws(DeepLinkOpenerError) {
-        let latitudeValue = String(latitude)
-        let longitudeValue = String(longitude)
-
-        guard let url = URL(
-            string: "wikipedia://places?latitude=\(latitudeValue)&longitude=\(longitudeValue)"
-        ) else {
+        var components = URLComponents()
+        components.scheme = "wikipedia"
+        components.host = "places"
+        components.queryItems = [
+            URLQueryItem(name: "latitude", value: String(latitude)),
+            URLQueryItem(name: "longitude", value: String(longitude))
+        ]
+        guard let url = components.url else {
             assertionFailure("Failed to construct deep link URL")
             return
         }

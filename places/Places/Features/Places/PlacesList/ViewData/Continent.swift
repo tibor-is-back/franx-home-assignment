@@ -35,7 +35,11 @@ nonisolated enum Continent: CaseIterable {
             return .northAmerica
         }
 
-        if latitude < 15, longitude <= -30 {
+        if latitude >= -35, latitude <= 35, longitude < -82 {
+            return .allContinents
+        }
+
+        if latitude >= -56, latitude < 15, longitude >= -82, longitude <= -30 {
             return .southAmerica
         }
 

@@ -2,10 +2,10 @@ import SwiftUI
 
 struct ManualPlaceView: View {
 
-    @State private var viewModel: ManualPlaveViewModel
+    @State private var viewModel: ManualPlaceViewModel
 
     init(deepLinkOpener: DeepLinkOpener) {
-        _viewModel = State(initialValue: ManualPlaveViewModel(deeplLinkOpener: deepLinkOpener))
+        _viewModel = State(initialValue: ManualPlaceViewModel(deepLinkOpener: deepLinkOpener))
     }
 
     var body: some View {

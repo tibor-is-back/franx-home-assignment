@@ -6,7 +6,7 @@ extension Constants {
             static let latitudeLabel = "Latitude"
             static let longitudeLabel = "Longitude"
             static let latitudePlaceholder = "eg. 40.7128"
-            static let longitudePlaceholder = "eg. 74.0.06"
+            static let longitudePlaceholder = "eg. -74.0060"
             static let openWikipedia = "Open Wikipedia"
             static let appNotInstalled = "Wikipedia app not installed"
         }

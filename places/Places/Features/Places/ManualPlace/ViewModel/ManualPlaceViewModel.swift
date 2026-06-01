@@ -1,7 +1,7 @@
 import SwiftUI
 
 @Observable
-final class ManualPlaveViewModel {
+final class ManualPlaceViewModel {
 
     var latitude: String = ""
     var longitude: String = ""
@@ -23,8 +23,7 @@ final class ManualPlaveViewModel {
 
     private let deepLinkOpener: DeepLinkOpener
 
-    init(deeplLinkOpener: DeepLinkOpener) {
-        self.deepLinkOpener = deeplLinkOpener
+        self.deepLinkOpener = deepLinkOpener
     }
 
     func handleEvent(_ event: ManualPlaceViewEvent) {

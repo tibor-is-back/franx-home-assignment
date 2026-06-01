@@ -130,14 +130,14 @@ struct ManualPlaceViewModelTests {
 
     private func makeSUT() -> SUT {
         let deepLinkOpener = MockDeepLinkOpener()
-        let viewModel = ManualPlaveViewModel(deeplLinkOpener: deepLinkOpener)
+        let viewModel = ManualPlaceViewModel(deepLinkOpener: deepLinkOpener)
         return SUT(viewModel: viewModel, deepLinkOpener: deepLinkOpener)
     }
 }
 
 @MainActor
 private struct SUT {
-    let viewModel: ManualPlaveViewModel
+    let viewModel: ManualPlaceViewModel
     let deepLinkOpener: MockDeepLinkOpener
 }
 
